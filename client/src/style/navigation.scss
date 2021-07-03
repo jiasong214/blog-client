@@ -1,0 +1,15 @@
+.navigation {
+  width: 10vw;
+  position: fixed;
+  left: 90vw;
+  top: 30vh;
+
+  .navigation__list {
+    li {
+      margin-bottom: 5px;
+      font-size: 1.6rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+  }
+}

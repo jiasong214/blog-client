@@ -1,0 +1,39 @@
+@import "./global.scss";
+
+.postCard {
+  width: 100%;
+  padding: 30px 0;
+  border-bottom: 1px solid rgb(230, 230, 230);
+
+  .postCard__title {
+    font-size: 3.6rem;
+    font-weight: 800;
+  }
+
+  .postCard__createAt {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+    color: gray;
+  }
+
+  .postCard__preview {
+    margin-bottom: 15px;
+    font-size: 1.6rem;
+  }
+
+  .postCard__comments {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    svg {
+      width: 18px;
+      margin-right: 5px;
+    }
+
+    div {
+      font-size: 1.4rem;
+    }
+  }
+}

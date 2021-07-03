@@ -1,0 +1,33 @@
+@import "./global.scss";
+
+.intro {
+  width: 80vw;
+  max-width: 980px;
+  margin: 30px auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  .intro__img {
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+    background: gray;
+    border-radius: 50%;
+    overflow: hidden;
+
+    img {
+      display: block;
+      width: 100%;
+    }
+  }
+
+  .intro__text {
+    font-size: 1.4rem;
+
+    a {
+      font-weight: 600;
+      text-decoration: underline;
+    }
+  }
+}

@@ -1,0 +1,21 @@
+.post {
+  width: 80vw;
+  max-width: 980px;
+  margin: 30px auto;
+
+  .post__title {
+    font-size: 4.8rem;
+    font-weight: 800;
+  }
+
+  .post__createAt {
+    display: block;
+    margin-bottom: 30px;
+    font-size: 1.4rem;
+    color: gray;
+  }
+
+  .post__text {
+    font-size: 1.8rem;
+  }
+}
