@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import '../style/createPost.scss';
-
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState, convertToRaw, ContentState } from 'draft-js';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
@@ -63,7 +62,7 @@ const CreatePost = ({postService}) => {
     if(!postCategory || postCategory.length === 0) return;
 
     let categoryArr = postCategory.split(' ');
-    
+
     return categoryArr.map((category) => {
       const lowerStr = category.toString().toLowerCase();
       const pureStr = lowerStr.split("#");

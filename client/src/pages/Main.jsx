@@ -1,20 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Intro from '../components/Intro';
 import PostCardsList from '../components/PostCartsList';
 import Navigation from '../components/Navigation';
 import CreatePostBtn from '../components/CreatePostBtn';
 
-const Main = ({postService}) => {
-  const [category, setCategory] = useState();
+const Main = ({postService, category, changeCategory}) => {
+  //all categories for navigation list
+  const [categories, setCategories] = useState([]);
+  //posts for posts list
+  const [posts, setPosts] = useState([]);
 
-  const onFilter = (category) => setCategory(category);
+  //update category list
+  useEffect(() => {
+    postService
+      .getCategories()
+      .then((data) => setCategories(data))
+      .catch(console.error())
+  }, [postService]);
+
+  //update post list depend on selected category
+  useEffect(() => {
+    postService
+      .getPostsByCategory(category)
+      .then((data) => setPosts(data))
+      .catch(console.error())
+  }, [postService, category]);
+
 
   return (
     <main className='main'>
       <Intro />
-      <PostCardsList postService={postService} category={category} />
+      <PostCardsList posts={posts} />
       <CreatePostBtn />
-      <Navigation postService={postService} onFilter={onFilter} />
+      <Navigation categories={categories} changeCategory={changeCategory} />
     </main>
   )
 }

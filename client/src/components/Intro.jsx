@@ -1,7 +1,7 @@
 import React from 'react';
 import '../style/intro.scss';
-
 import Avatar from '../images/avatar2.jpg';
+
 const Intro = () => {
   return (
     <aside className="intro">
