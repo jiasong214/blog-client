@@ -13,11 +13,10 @@ const postService = new PostService();
 
 
 function App() {
-
   return (
     <div className="App">
       <BrowserRouter>
-        <Header />
+        <Header postService={postService} />
         <Switch>
             <Route exact path="/">
               <Main postService={postService} />

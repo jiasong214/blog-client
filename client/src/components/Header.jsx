@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import '../style/header.scss';
 
 const Header = () => {
-
   return (
     <header className="header">
       <div>

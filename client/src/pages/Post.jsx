@@ -19,7 +19,7 @@ const Post = ({postService}) => {
   const onDelete = (id) => {
     postService
       .deletePost(id)
-      .then((data) => console.log(data))
+      .then()
       .catch(console.error());
     
     history.push("/");

@@ -60,8 +60,16 @@ const CreatePost = ({postService}) => {
 
   //convert category strings to array
   const convertToArray = (postCategory) => {
-    if(!postCategory) return;
-    return postCategory.split(' ');
+    if(!postCategory || postCategory.length === 0) return;
+
+    let categoryArr = postCategory.split(' ');
+    
+    return categoryArr.map((category) => {
+      const lowerStr = category.toString().toLowerCase();
+      const pureStr = lowerStr.split("#");
+
+      return pureStr[pureStr.length - 1];
+    })
   }
 
   //form submit
