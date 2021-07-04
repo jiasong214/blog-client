@@ -4,11 +4,12 @@ import EditPostBtn from '../components/EditPostBtn';
 import DeletePostBtn from '../components/DeletePostBtn';
 import '../style/post.scss';
 
-const Post = ({postService}) => {
+const Post = ({postService, changePostsByDelete}) => {
   const params = useParams();
   const history = useHistory();
   const [post, setPost] = useState([]);
 
+  //get the post
   useEffect(() => {
     postService
       .getPostById(params.id)
@@ -16,10 +17,11 @@ const Post = ({postService}) => {
       .catch(console.error());
   }, [postService, params.id]);
 
+  //delete the post
   const onDelete = (id) => {
     postService
       .deletePost(id)
-      .then()
+      .then(() => changePostsByDelete(id))
       .catch(console.error());
     
     history.push("/");

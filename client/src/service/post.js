@@ -1,15 +1,15 @@
 export default class PostService {
-  constructor () {
+  constructor (tokenStorage) {
     this.baseURL = 'http://localhost:8080';
+    this.token = tokenStorage.getToken();
   }
 
   async getPostsByCategory(category) {
     const query = category ? `/category/${category}` : '';
 
-    console.log(`${this.baseURL}/post${query}`)
-
     const res =  await fetch(`${this.baseURL}/post${query}`, {
       headers: {
+        'Authorization': `Bearer ${this.token}`,
         'Content-Type': 'application/json',
       },
       method: 'GET'
@@ -19,7 +19,7 @@ export default class PostService {
     try{
       data = res.json();
     }catch(err){
-      console.error(err)
+      console.error(err);
     }
 
     return data;
@@ -28,6 +28,7 @@ export default class PostService {
   async getPostById(id) {
     const res =  await fetch(`${this.baseURL}/post/${id}`, {
       headers: {
+        'Authorization': `Bearer ${this.token}`,
         'Content-Type': 'application/json',
       },
       method: 'GET'
@@ -46,6 +47,7 @@ export default class PostService {
   async createPost(category, title, text) {
     const res =  await fetch(`${this.baseURL}/post`, {
       headers: {
+        'Authorization': `Bearer ${this.token}`,
         'Content-Type': 'application/json',
       },
       method: 'POST',
@@ -65,6 +67,7 @@ export default class PostService {
   async updatePost(id, category, title, text) {
     const res =  await fetch(`${this.baseURL}/post/${id}`, {
       headers: {
+        'Authorization': `Bearer ${this.token}`,
         'Content-Type': 'application/json',
       },
       method: 'PUT',
@@ -82,26 +85,19 @@ export default class PostService {
   }
 
   async deletePost(id) {
-    const res =  await fetch(`${this.baseURL}/post/${id}`, {
+    return await fetch(`${this.baseURL}/post/${id}`, {
       headers: {
+        'Authorization': `Bearer ${this.token}`,
         'Content-Type': 'application/json',
       },
       method: 'DELETE',
     });
-
-    let data;
-    try{
-      data = res.json();
-    }catch(err){
-      console.error(err)
-    }
-
-    return data;
   }
 
   async getCategories() {
     const res =  await fetch(`${this.baseURL}/category`, {
       headers: {
+        'Authorization': `Bearer ${this.token}`,
         'Content-Type': 'application/json',
       },
       method: 'GET'

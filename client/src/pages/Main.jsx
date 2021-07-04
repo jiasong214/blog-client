@@ -4,11 +4,11 @@ import PostCardsList from '../components/PostCartsList';
 import Navigation from '../components/Navigation';
 import CreatePostBtn from '../components/CreatePostBtn';
 
-const Main = ({postService, category, changeCategory}) => {
+const Main = ({postService, posts, changeCategory}) => {
   //all categories for navigation list
   const [categories, setCategories] = useState([]);
-  //posts for posts list
-  const [posts, setPosts] = useState([]);
+  // //posts for posts list
+  // const [posts, setPosts] = useState([]);
 
   //update category list
   useEffect(() => {
@@ -18,13 +18,13 @@ const Main = ({postService, category, changeCategory}) => {
       .catch(console.error())
   }, [postService]);
 
-  //update post list depend on selected category
-  useEffect(() => {
-    postService
-      .getPostsByCategory(category)
-      .then((data) => setPosts(data))
-      .catch(console.error())
-  }, [postService, category]);
+  // //update post list depend on selected category
+  // useEffect(() => {
+  //   postService
+  //     .getPostsByCategory(category)
+  //     .then((data) => setPosts(data))
+  //     .catch(console.error())
+  // }, [postService, category]);
 
 
   return (
