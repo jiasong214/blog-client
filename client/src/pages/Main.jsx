@@ -4,12 +4,11 @@ import PostCardsList from '../components/PostCartsList';
 import Navigation from '../components/Navigation';
 import CreatePostBtn from '../components/CreatePostBtn';
 
-const Main = ({postService, posts, changeCategory}) => {
+const Main = ({postService, posts, changeCategory, user}) => {
   //all categories for navigation list
   const [categories, setCategories] = useState([]);
-  // //posts for posts list
-  // const [posts, setPosts] = useState([]);
 
+  console.log(`user: ${user}`)
   //update category list
   useEffect(() => {
     postService
@@ -18,21 +17,12 @@ const Main = ({postService, posts, changeCategory}) => {
       .catch(console.error())
   }, [postService]);
 
-  // //update post list depend on selected category
-  // useEffect(() => {
-  //   postService
-  //     .getPostsByCategory(category)
-  //     .then((data) => setPosts(data))
-  //     .catch(console.error())
-  // }, [postService, category]);
-
-
   return (
     <main className='main'>
       <Intro />
       <PostCardsList posts={posts} />
-      <CreatePostBtn />
       <Navigation categories={categories} changeCategory={changeCategory} />
+      {user && <CreatePostBtn />}
     </main>
   )
 }

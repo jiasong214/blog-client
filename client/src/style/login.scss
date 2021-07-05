@@ -1,0 +1,42 @@
+@import "./global.scss";
+
+.login {
+  width: 80vw;
+  max-width: 980px;
+  margin: 100px auto 0;
+
+  .login__title {
+    margin-bottom: 30px;
+    font-size: 3.8rem;
+    font-weight: 800;
+  }
+
+  form {
+    input {
+      all: unset;
+      display: block;
+      width: 280px;
+      padding: 7px 0px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid black;
+      font-size: 1.4rem;
+
+      &:nth-child(2) {
+        margin-bottom: 30px;
+      }
+    }
+
+    button {
+      @extend input;
+      background: black;
+      font-size: 1.2rem;
+      color: white;
+      text-align: center;
+    }
+  }
+
+  .login__text {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+  }
+}

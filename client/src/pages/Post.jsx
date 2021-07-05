@@ -4,7 +4,7 @@ import EditPostBtn from '../components/EditPostBtn';
 import DeletePostBtn from '../components/DeletePostBtn';
 import '../style/post.scss';
 
-const Post = ({postService, changePostsByDelete}) => {
+const Post = ({postService, changePostsByDelete, user}) => {
   const params = useParams();
   const history = useHistory();
   const [post, setPost] = useState([]);
@@ -19,12 +19,14 @@ const Post = ({postService, changePostsByDelete}) => {
 
   //delete the post
   const onDelete = (id) => {
-    postService
-      .deletePost(id)
-      .then(() => changePostsByDelete(id))
-      .catch(console.error());
-    
-    history.push("/");
+    if (window.confirm('Do you want to delete this post?')) {
+      postService
+        .deletePost(id)
+        .then(() => changePostsByDelete(id))
+        .catch(console.error());
+      
+      history.push("/");
+    }
   };
 
   return (
@@ -34,8 +36,12 @@ const Post = ({postService, changePostsByDelete}) => {
       <span className="post__createAt">{post.createAt}</span>
       <div className="post__text" dangerouslySetInnerHTML={{__html: post.text}} />
     </section>
-    <EditPostBtn id={params.id} />
-    <DeletePostBtn id={params.id} onDelete={onDelete} />
+    {user && 
+      <div className="post__adminBtn">
+        <EditPostBtn id={params.id} />
+        <DeletePostBtn id={params.id} onDelete={onDelete} />
+      </div>
+    }
     </>
   )
 }

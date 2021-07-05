@@ -1,15 +1,17 @@
 export default class PostService {
   constructor (tokenStorage) {
     this.baseURL = 'http://localhost:8080';
-    this.token = tokenStorage.getToken();
+    this.tokenStorage = tokenStorage;
+
   }
 
   async getPostsByCategory(category) {
     const query = category ? `/category/${category}` : '';
+    const token = this.tokenStorage.getToken();
 
     const res =  await fetch(`${this.baseURL}/post${query}`, {
       headers: {
-        'Authorization': `Bearer ${this.token}`,
+        Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
       method: 'GET'
@@ -26,9 +28,11 @@ export default class PostService {
   }
 
   async getPostById(id) {
+    const token = this.tokenStorage.getToken();
+
     const res =  await fetch(`${this.baseURL}/post/${id}`, {
       headers: {
-        'Authorization': `Bearer ${this.token}`,
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
       method: 'GET'
@@ -45,9 +49,11 @@ export default class PostService {
   }
 
   async createPost(category, title, text) {
+    const token = this.tokenStorage.getToken();
+
     const res =  await fetch(`${this.baseURL}/post`, {
       headers: {
-        'Authorization': `Bearer ${this.token}`,
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
       method: 'POST',
@@ -65,9 +71,11 @@ export default class PostService {
   }
 
   async updatePost(id, category, title, text) {
+    const token = this.tokenStorage.getToken();
+
     const res =  await fetch(`${this.baseURL}/post/${id}`, {
       headers: {
-        'Authorization': `Bearer ${this.token}`,
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
       method: 'PUT',
@@ -85,9 +93,11 @@ export default class PostService {
   }
 
   async deletePost(id) {
+    const token = this.tokenStorage.getToken();
+
     return await fetch(`${this.baseURL}/post/${id}`, {
       headers: {
-        'Authorization': `Bearer ${this.token}`,
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
       method: 'DELETE',
@@ -95,9 +105,11 @@ export default class PostService {
   }
 
   async getCategories() {
+    const token = this.tokenStorage.getToken();
+
     const res =  await fetch(`${this.baseURL}/category`, {
       headers: {
-        'Authorization': `Bearer ${this.token}`,
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
       method: 'GET'
