@@ -1,28 +1,25 @@
 export default class AuthService {
-  constructor (tokenStorage) {
-    this.baseURL = 'http://localhost:8080';
+  constructor (http, tokenStorage) {
+    this.http = http;
     this.tokenStorage = tokenStorage;
   }
 
   async login(username, password) {
-    const data = await fetch(`${this.baseURL}/auth/login`, {
-      headers: { 'Content-Type': 'application/json' },
+    const data =  this.http.fetch(`/auth/login`, {
       method: 'POST',
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ username, password })
     });
     this.tokenStorage.saveToken(data.token);
-    return data.json();
+
+    return data;
   }
 
   async me() {
     const token = this.tokenStorage.getToken();
 
-    return fetch(`${this.baseURL}/auth/me`, {
+    return this.http.fetch(`/auth/me`, {
       method: 'GET',
-      headers: { 
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      },
+      headers: { Authorization: `Bearer ${token}` }
     });
   }
 

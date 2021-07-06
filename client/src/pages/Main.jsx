@@ -8,7 +8,6 @@ const Main = ({postService, posts, changeCategory, user}) => {
   //all categories for navigation list
   const [categories, setCategories] = useState([]);
 
-  console.log(`user: ${user}`)
   //update category list
   useEffect(() => {
     postService

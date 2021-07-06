@@ -1,127 +1,60 @@
 export default class PostService {
-  constructor (tokenStorage) {
-    this.baseURL = 'http://localhost:8080';
+  constructor (http, tokenStorage) {
+    this.http = http;
     this.tokenStorage = tokenStorage;
-
   }
 
-  async getPostsByCategory(category) {
-    const query = category ? `/category/${category}` : '';
+  //common header part
+  getHeaders() {
+    //get a token from storage and return with headers format
     const token = this.tokenStorage.getToken();
+    return { Authorization: `Bearer ${token}`, };
+  }
 
-    const res =  await fetch(`${this.baseURL}/post${query}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-      method: 'GET'
+
+  async getPostsByCategory(category) {
+    const query = category ? `/post/category/${category}` : '/post';
+
+    return this.http.fetch(query, {
+      method: 'GET',
+      headers: this.getHeaders()
     });
-
-    let data;
-    try{
-      data = res.json();
-    }catch(err){
-      console.error(err);
-    }
-
-    return data;
   }
 
   async getPostById(id) {
-    const token = this.tokenStorage.getToken();
-
-    const res =  await fetch(`${this.baseURL}/post/${id}`, {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-      method: 'GET'
+    return this.http.fetch(`/post/${id}`, {
+      method: 'GET',
+      headers : this.getHeaders()
     });
-
-    let data;
-    try{
-      data = res.json();
-    }catch(err){
-      console.error(err)
-    }
-
-    return data;
   }
 
   async createPost(category, title, text) {
-    const token = this.tokenStorage.getToken();
-
-    const res =  await fetch(`${this.baseURL}/post`, {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
+    return this.http.fetch(`/post`, {
       method: 'POST',
+      headers: this.getHeaders(),
       body: JSON.stringify({ category, title, text })
     });
-
-    let data;
-    try{
-      data = res.json();
-    }catch(err){
-      console.error(err)
-    }
-
-    return data;
   }
 
   async updatePost(id, category, title, text) {
-    const token = this.tokenStorage.getToken();
-
-    const res =  await fetch(`${this.baseURL}/post/${id}`, {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
+    return this.http.fetch(`/post/${id}`, {
       method: 'PUT',
+      headers: this.getHeaders(),
       body: JSON.stringify({ category, title, text })
     });
-
-    let data;
-    try{
-      data = res.json();
-    }catch(err){
-      console.error(err)
-    }
-
-    return data;
   }
 
   async deletePost(id) {
-    const token = this.tokenStorage.getToken();
-
-    return await fetch(`${this.baseURL}/post/${id}`, {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
+    return this.http.fetch(`/post/${id}`, {
       method: 'DELETE',
+      headers: this.getHeaders()
     });
   }
 
   async getCategories() {
-    const token = this.tokenStorage.getToken();
-
-    const res =  await fetch(`${this.baseURL}/category`, {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-      method: 'GET'
+    this.http.fetch(`/category`, {
+      method: 'GET',
+      headers: this.getHeaders()
     });
-
-    let data;
-    try{
-      data = res.json();
-    }catch(err){
-      console.error(err)
-    }
-
-    return data;
   }
 }
