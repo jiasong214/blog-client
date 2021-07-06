@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import Comments from '../components/Comments';
 import EditPostBtn from '../components/EditPostBtn';
 import DeletePostBtn from '../components/DeletePostBtn';
 import '../style/post.scss';
@@ -37,6 +38,7 @@ const Post = ({postService, changePostsByDelete}) => {
       <h2 className="post__title">{post.title}</h2>
       <span className="post__createAt">{post.createAt}</span>
       <div className="post__text" dangerouslySetInnerHTML={{__html: post.text}} />
+      <Comments />
     </section>
     {user && 
       <div className="post__adminBtn">
