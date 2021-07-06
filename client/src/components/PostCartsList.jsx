@@ -14,7 +14,6 @@ const PostCardsList = ({posts}) => {
             title={post.title}
             createAt={post.createAt}
             text={post.text} 
-            // comments={post.comments}
           />
         ))}
       </ul>

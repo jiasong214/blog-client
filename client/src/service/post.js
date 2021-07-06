@@ -52,7 +52,7 @@ export default class PostService {
   }
 
   async getCategories() {
-    this.http.fetch(`/category`, {
+    return this.http.fetch(`/category`, {
       method: 'GET',
       headers: this.getHeaders()
     });

@@ -5,7 +5,7 @@ export default class AuthService {
   }
 
   async login(username, password) {
-    const data =  this.http.fetch(`/auth/login`, {
+    const data =  await this.http.fetch(`/auth/login`, {
       method: 'POST',
       body: JSON.stringify({ username, password })
     });
@@ -15,7 +15,7 @@ export default class AuthService {
   }
 
   async me() {
-    const token = this.tokenStorage.getToken();
+    const token = await this.tokenStorage.getToken();
 
     return this.http.fetch(`/auth/me`, {
       method: 'GET',

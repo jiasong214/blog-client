@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../style/postCard.scss';
 
-const PostCard = ({id, title, createAt, text, comments}) => {
+const PostCard = ({id, title, createAt, text }) => {
   return (
     <li className="postCard">
       <Link to={{pathname: `/post?id=${id}`}}>

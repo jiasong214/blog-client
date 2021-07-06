@@ -6,28 +6,12 @@ import Main from './pages/Main';
 import Post from './pages/Post';
 import Login from './pages/Login';
 import CreatePost from './pages/CreatePost';
-import HttpClient from './network/http';
-import PostService from './service/post.js';
-import AuthService from './service/auth';
-import TokenStorage from './db/token';
 
-//class that manage token in localStorage
-const tokenStorage = new TokenStorage();
-
-//basic url from env file
-const baseURL = process.env.REACT_APP_BASE_URL;
-
-//http request common option
-const httpClient = new HttpClient(baseURL);
-
-//class that controll all post/auth related APIs
-const postService = new PostService(httpClient, tokenStorage);
-const authService = new AuthService(httpClient, tokenStorage);
-
-function App() {
+function App({postService}) {
   const [category, setCategory] = useState();
   const [posts, setPosts] = useState([]);
-  const [user, setUser] = useState();
+
+  console.log("App")
 
   //update post list depend on selected category
   useEffect(() => {
@@ -35,52 +19,55 @@ function App() {
       .getPostsByCategory(category)
       .then((data) => setPosts(data))
       .catch(console.error())
-  }, [category]);
+  }, [postService, category]);
 
   //change category state
   const changeCategory = (category) => setCategory(category);
 
   //change posts state when post is deleted
   const changePostsByDelete = (id) => {
-    setPosts(() => posts.filter(post => parseInt(post.id) !== parseInt(id)));
+    setPosts(() => posts.filter((post) => parseInt(post.id) !== parseInt(id)));
   };
 
-  const changeUserState = (user) => setUser(user);
+  const changePostsByCreate = (post) => {
+    setPosts(() => [post, ...posts]);
+  };
+
+  const changePostsByUpdate = (id, updated) => {
+    setPosts(() => posts.map((post) => parseInt(post.id) === parseInt(id) ? updated : post));
+  };
 
 
   return (
     <div className="App">
       <BrowserRouter>
-        <Header 
-          changeCategory={changeCategory} 
-          tokenStorage={tokenStorage} />
+        <Header changeCategory={changeCategory} />
         <Switch>
-            <Route exact path="/">
-              <Main 
-                postService={postService} 
-                posts={posts} 
-                changeCategory={changeCategory}
-                user={user} />
-            </Route>
-            <Route exact path="/post?id=:id">
-              <Post 
-                postService={postService} 
-                changePostsByDelete={changePostsByDelete}
-                user={user} />
-            </Route>
-            <Route path="/post/compost">
-              <CreatePost postService={postService} />
-            </Route>
-            {/* 이거 어떻게 묶는지? */}
-            <Route path="/post/compost?id=:id">
-              <CreatePost postService={postService} />
-            </Route>
-            <Route path="/login">
-              <Login 
-                authService={authService} 
-                changeUserState={changeUserState} />
-            </Route>
-          </Switch>
+          <Route exact path="/">
+            <Main 
+              postService={postService}  
+              changeCategory={changeCategory}
+              posts={posts} />
+          </Route>
+          <Route exact path="/post?id=:id">
+            <Post 
+              postService={postService} 
+              changePostsByDelete={changePostsByDelete} />
+          </Route>
+          <Route path="/post/compost">
+            <CreatePost 
+              postService={postService} 
+              changePostsByCreate={changePostsByCreate}
+              changePostsByUpdate={changePostsByUpdate} />
+          </Route>
+          {/* 이거 어떻게 묶는지? */}
+          <Route path="/post/compost?id=:id">
+            <CreatePost postService={postService} />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+        </Switch>
         <Footer />
       </BrowserRouter>
     </div>

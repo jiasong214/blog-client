@@ -8,7 +8,7 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 
-const CreatePost = ({postService}) => {
+const CreatePost = ({postService, changePostsByCreate, changePostsByUpdate}) => {
   const history = useHistory();
   const params = useParams();
   const [formerData, setFormerData] = useState();
@@ -59,7 +59,8 @@ const CreatePost = ({postService}) => {
 
   //convert category strings to array
   const convertToArray = (postCategory) => {
-    if(!postCategory || postCategory.length === 0) return;
+    if(!postCategory) return;
+    if(!postCategory.includes(" ")) return;
 
     let categoryArr = postCategory.split(' ');
 
@@ -85,16 +86,16 @@ const CreatePost = ({postService}) => {
     //UPDATE
       postService
         .updatePost(params.id , post.category, post.title, post.text)
-        .then((data) => console.log(data))
-        .catch(console.error());
+        .then((data) => changePostsByUpdate(params.id, data))
+        .catch(console.error);
 
       history.push(`/post?id=${params.id}`);
     }else {
     //CREATE
       postService
-      .createPost(post.category, post.title, post.text)
-      .then((data) => console.log(data))
-      .catch(console.error());
+        .createPost(post.category, post.title, post.text)
+        .then((data) => changePostsByCreate(data))
+        .catch(console.error);
 
       history.push("/");
     }

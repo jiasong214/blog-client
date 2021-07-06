@@ -1,30 +1,25 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import '../style/login.scss';
 
-const Login = ({authService, changeUserState}) => {
+const Login = () => {
   const history = useHistory();
+  const { onLogin } = useAuth();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const onChangeUsername = (event) => {
-    setUsername(event.target.value);
-  }
-  const onChangePassword = (event) => {
-    setPassword(event.target.value);
-  }
+  const onChangeUsername = (event) => setUsername(event.target.value);
+  const onChangePassword = (event) => setPassword(event.target.value);
 
   const onSubmit = (event) => {
     event.preventDefault();
 
-    authService
-      .login(username, password)
-      .then((data) => changeUserState(data));
-
+    onLogin(username, password);
     history.push('/');
   }
 
-
+  
   return (
     <div className="login">
       <h2 className="login__title">LOG IN</h2>

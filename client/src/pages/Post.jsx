@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import EditPostBtn from '../components/EditPostBtn';
 import DeletePostBtn from '../components/DeletePostBtn';
 import '../style/post.scss';
 
-const Post = ({postService, changePostsByDelete, user}) => {
+const Post = ({postService, changePostsByDelete}) => {
   const params = useParams();
   const history = useHistory();
   const [post, setPost] = useState([]);
+  const { user } = useAuth();
 
   //get the post
   useEffect(() => {
