@@ -1,8 +1,8 @@
 @import "./global.scss";
 
 .createPost {
-  width: 80vw;
-  max-width: 980px;
+  width: $width;
+  max-width: $max-width;
   margin: 30px auto;
 
   .createPost__title {
@@ -10,7 +10,7 @@
     display: block;
     width: 100%;
     margin-bottom: 10px;
-    border-bottom: 1px solid rgb(230, 230, 230);
+    border-bottom: 1px solid $light-gray;
     font-size: 3.6rem;
     font-weight: 800;
   }
@@ -34,7 +34,7 @@
 
   .createPost__editor {
     height: calc(100% - 47px);
-    border: 1px solid rgb(230, 230, 230);
+    border: 1px solid $light-gray;
     padding: 10px;
     font-size: 1.6rem;
     line-height: 1;

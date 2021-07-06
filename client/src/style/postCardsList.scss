@@ -1,7 +1,7 @@
 @import "./global.scss";
 
 .postCardsList {
-  width: 80vw;
-  max-width: 980px;
+  width: $width;
+  max-width: $max-width;
   margin: 0 auto;
 }

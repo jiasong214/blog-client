@@ -1,8 +1,8 @@
 @import "./global.scss";
 
 .login {
-  width: 80vw;
-  max-width: 980px;
+  width: $width;
+  max-width: $max-width;
   margin: 100px auto 0;
 
   .login__title {

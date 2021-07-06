@@ -1,8 +1,8 @@
 @import "./global.scss";
 
 .footer {
-  width: 80vw;
-  max-width: 980px;
+  width: $width;
+  max-width: $max-width;
   padding: 10px 0;
   margin: 30px auto 0;
   // position: absolute;
@@ -11,5 +11,5 @@
   // transform: translateX(-50%);
   font-size: 1.2rem;
   text-align: right;
-  color: rgb(200, 200, 200);
+  color: $light-gray;
 }
