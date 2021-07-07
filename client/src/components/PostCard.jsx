@@ -5,7 +5,7 @@ import '../style/postCard.scss';
 const PostCard = ({id, title, createAt, text }) => {
   return (
     <li className="postCard">
-      <Link to={{pathname: `/post?id=${id}`}}>
+      <Link to={{pathname: `/post/${id}`}}>
         <h3 className="postCard__title">{title}</h3>
         <span className="postCard__createAt">{createAt}</span>
         <p className="postCard__preview" dangerouslySetInnerHTML={{__html: text}}/>

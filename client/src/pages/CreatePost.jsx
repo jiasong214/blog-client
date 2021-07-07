@@ -15,6 +15,7 @@ const CreatePost = ({postService, changePostsByCreate, changePostsByUpdate}) => 
   const [postTitle, setPostTitle] = useState();
   const [postCategory, setPostCategory] = useState();
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  
 
   //UPDATE: if it's for update, set post's data
   useEffect(() => {
@@ -89,7 +90,7 @@ const CreatePost = ({postService, changePostsByCreate, changePostsByUpdate}) => 
         .then((data) => changePostsByUpdate(params.id, data))
         .catch(console.error);
 
-      history.push(`/post?id=${params.id}`);
+      history.push(`/post/${params.id}`);
     }else {
     //CREATE
       postService

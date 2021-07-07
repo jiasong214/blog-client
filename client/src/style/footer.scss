@@ -5,11 +5,28 @@
   max-width: $max-width;
   padding: 10px 0;
   margin: 30px auto 0;
-  // position: absolute;
-  // bottom: 0;
-  // left: 50%;
-  // transform: translateX(-50%);
-  font-size: 1.2rem;
-  text-align: right;
-  color: $light-gray;
+  display: flex;
+  justify-content: flex-end;
+
+  > * {
+    padding: 0 10px;
+    border-right: 1px solid $light-gray;
+
+    &:last-child {
+      border: none;
+    }
+  }
+
+  .footer__logout,
+  .footer__login {
+    display: block;
+    font-size: 1.2rem;
+    color: $light-gray;
+    cursor: pointer;
+  }
+
+  .footer__copyright {
+    font-size: 1.2rem;
+    color: $light-gray;
+  }
 }

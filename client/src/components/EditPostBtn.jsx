@@ -5,7 +5,7 @@ import '../style/editPostBtn.scss';
 const EditPostBtn = ({id}) => {
   return (
     <aside className='editPostBtn'>
-      <Link to={{ pathname: `/post/compost?id=${id}` }}>
+      <Link to={{ pathname: `/post/${id}/edit` }}>
         Edit This Post
       </Link>
     </aside>

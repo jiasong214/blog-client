@@ -22,7 +22,7 @@ const Login = () => {
   
   return (
     <div className="login">
-      <h2 className="login__title">LOG IN</h2>
+      <h2 className="login__title">Admin</h2>
       <form onSubmit={(event) => onSubmit(event)}>
         <input 
           type="text" 
@@ -38,7 +38,6 @@ const Login = () => {
         />
         <button type="submit">LOG IN</button>
       </form>
-      <p className="login__text">* This is for Admin log in.</p>
     </div>
   )
 }

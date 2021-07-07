@@ -43,30 +43,37 @@ function App({postService}) {
       <BrowserRouter>
         <Header changeCategory={changeCategory} />
         <Switch>
+          {/* main: all posts */}
           <Route exact path="/">
             <Main 
               postService={postService}  
               changeCategory={changeCategory}
               posts={posts} />
           </Route>
-          <Route exact path="/post?id=:id">
-            <Post 
-              postService={postService} 
-              changePostsByDelete={changePostsByDelete} />
-          </Route>
-          <Route path="/post/compost">
+
+          {/* create post page */}
+          <Route exact path="/post/compose">
             <CreatePost 
               postService={postService} 
               changePostsByCreate={changePostsByCreate}
               changePostsByUpdate={changePostsByUpdate} />
           </Route>
-          {/* 이거 어떻게 묶는지? */}
-          <Route path="/post/compost?id=:id">
+
+          {/* post(id) page */}
+          <Route exact path="/post/:id">
+            <Post 
+              postService={postService} 
+              changePostsByDelete={changePostsByDelete} />
+          </Route>
+
+          {/* edit post(id)  */}
+          <Route exact path="/post/:id/edit">
             <CreatePost postService={postService} />
           </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
+
+          {/* login page  */}
+          <Route exact path="/login" component={Login} />
+
         </Switch>
         <Footer />
       </BrowserRouter>
