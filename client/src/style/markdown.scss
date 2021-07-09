@@ -66,14 +66,19 @@
   }
 
   code {
-    padding: 0 5px;
-    background: rgb(245, 242, 240);
+    padding: 2px 5px;
+    // background: rgb(245, 242, 240);
+    background: #2f2f2f;
     font-size: 0.9em;
-    color: rgb(221, 74, 104);
+    // color: rgb(221, 74, 104);
+    color: #eeeeee;
+
+    border-radius: 3px;
   }
 
   a > code {
-    color: #0366d6;
+    // color: #0366d6;
+    color: #89ddff;
   }
 
   div > code {

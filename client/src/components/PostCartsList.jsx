@@ -3,10 +3,9 @@ import PostCard from './PostCard';
 import '../style/postCardsList.scss';
 
 const PostCardsList = ({posts}) => {
-  console.log(posts)
   return (
     <>
-      {posts.length === 0 && <p className='posts-empty'>No Posts Yet</p>}
+      {posts.length === 0 && <p className='postCardsList-empty'>No Posts Yet :(</p>}
       <ul className="postCardsList">
         {posts.map((post) => (
           <PostCard 

@@ -8,21 +8,17 @@ import Login from './pages/Login';
 import CreatePost from './pages/CreatePost';
 
 function App({postService}) {
-  const [category, setCategory] = useState();
   const [posts, setPosts] = useState([]);
 
-  console.log("App")
+  console.log("App");
 
   //update post list depend on selected category
   useEffect(() => {
     postService
-      .getPostsByCategory(category)
+      .getPosts()
       .then((data) => setPosts(data))
       .catch(console.error())
-  }, [postService, category]);
-
-  //change category state
-  const changeCategory = (category) => setCategory(category);
+  }, [postService]);
 
   //change posts state when post is deleted
   const changePostsByDelete = (id) => {
@@ -34,20 +30,23 @@ function App({postService}) {
   };
 
   const changePostsByUpdate = (id, updated) => {
-    setPosts(() => posts.map((post) => parseInt(post.id) === parseInt(id) ? updated : post));
+    const updatedPost = posts.map((post) => (
+      parseInt(post.id) === parseInt(id) ? updated : post
+    ));
+    
+    setPosts(updatedPost);
   };
 
 
   return (
     <div className="App">
       <BrowserRouter>
-        <Header changeCategory={changeCategory} />
+        <Header />
         <Switch>
           {/* main: all posts */}
           <Route exact path="/">
             <Main 
               postService={postService}  
-              changeCategory={changeCategory}
               posts={posts} />
           </Route>
 

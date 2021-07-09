@@ -1,0 +1,21 @@
+@import "./global.scss";
+
+.postSetting {
+  padding: 10px 0;
+  display: flex;
+  justify-content: flex-end;
+
+  > * {
+    display: block;
+    padding: 0 10px;
+    border-right: 1px solid $light-gray;
+    font-size: 1.2rem;
+    color: $light-gray;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    &:last-child {
+      border: none;
+    }
+  }
+}

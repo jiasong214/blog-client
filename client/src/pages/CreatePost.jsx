@@ -10,7 +10,6 @@ const CreatePost = ({postService, changePostsByCreate, changePostsByUpdate}) => 
   const [formerData, setFormerData] = useState();
   const [postTitle, setPostTitle] = useState();
   const [postSubtitle, setPostSubtitle] = useState();
-  const [postCategory, setPostCategory] = useState();
   const [markdown, setMarkdown] = useState('');
 
   //UPDATE: if it's for update, set post's data
@@ -29,7 +28,6 @@ const CreatePost = ({postService, changePostsByCreate, changePostsByUpdate}) => 
       //set former state
       setPostTitle(formerData.title);
       setPostSubtitle(formerData.subtitle);
-      setPostCategory(formerData.category);
       setMarkdown(formerData.text);
     }
   }, [formerData])
@@ -37,30 +35,13 @@ const CreatePost = ({postService, changePostsByCreate, changePostsByUpdate}) => 
   //input handling
   const onTitleChange = (event) => setPostTitle(event.target.value);
   const onSubtitleChange = (event) => setPostSubtitle(event.target.value);
-  const onCategoryChange = (event) => setPostCategory(event.target.value);
   const onMarkdownChange = (event) => setMarkdown(event.target.value);
-
-  //convert category strings to array
-  const convertToArray = (postCategory) => {
-    if(!postCategory) return;
-    if(!postCategory.includes(" ")) return;
-
-    let categoryArr = postCategory.split(' ');
-
-    return categoryArr.map((category) => {
-      const lowerStr = category.toString().toLowerCase();
-      const pureStr = lowerStr.split("#");
-
-      return pureStr[pureStr.length - 1];
-    }).toString();
-  }
 
   //form submit
   const onSubmit = (event) => {
     event.preventDefault();
 
     const post = {
-      category: convertToArray(postCategory),
       title: postTitle,
       subtitle: postSubtitle,
       text: markdown
@@ -69,7 +50,7 @@ const CreatePost = ({postService, changePostsByCreate, changePostsByUpdate}) => 
     if(params.id){
     //UPDATE
       postService
-        .updatePost(params.id , post.category, post.title, post.subtitle, post.text)
+        .updatePost(params.id , post.title, post.subtitle, post.text)
         .then((data) => changePostsByUpdate(params.id, data))
         .catch(console.error);
 
@@ -77,7 +58,7 @@ const CreatePost = ({postService, changePostsByCreate, changePostsByUpdate}) => 
     }else {
     //CREATE
       postService
-        .createPost(post.category, post.title, post.subtitle, post.text)
+        .createPost(post.title, post.subtitle, post.text)
         .then((data) => changePostsByCreate(data))
         .catch(console.error);
 
@@ -101,13 +82,6 @@ const CreatePost = ({postService, changePostsByCreate, changePostsByUpdate}) => 
           placeholder="Post Subtitle" 
           value={postSubtitle ? postSubtitle : ''}
           onChange={onSubtitleChange} 
-        />
-        <input  
-          type="text" 
-          className="createPost__category" 
-          placeholder="#Tag" 
-          value={postCategory ? postCategory : ''} 
-          onChange={onCategoryChange} 
         />
         </div>
       <div className="createPost-textbox">

@@ -12,10 +12,8 @@ export default class PostService {
   }
 
 
-  async getPostsByCategory(category) {
-    const query = category ? `/post/category/${category}` : '/post';
-
-    return this.http.fetch(query, {
+  async getPosts() {
+    return this.http.fetch(`/post`, {
       method: 'GET',
       headers: this.getHeaders()
     });

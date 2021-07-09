@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import Markdown from '../components/Markdown';
+import PostSetting from '../components/PostSetting';
 import Comments from '../components/Comments';
-import EditPostBtn from '../components/EditPostBtn';
-import DeletePostBtn from '../components/DeletePostBtn';
 import '../style/post.scss';
 
 
@@ -44,20 +43,15 @@ const Post = ({postService, changePostsByDelete}) => {
   }
 
   return (
-    <>
     <section className='post'>
-      <h2 className="post__title">{post.title}</h2>
-      <span className="post__createdAt">{convertDate(post.createdAt)}</span>
-      <Markdown text={post.text} />
+      <div className="post-container">
+        <h2 className="post__title">{post.title}</h2>
+        <span className="post__createdAt">{convertDate(post.createdAt)}</span>
+        <Markdown text={post.text} />
+      </div>
+      {user && <PostSetting id={params.id} onDelete={onDelete} />}
       <Comments />
     </section>
-    {user && 
-      <div className="post__adminBtn">
-        <EditPostBtn id={params.id} />
-        <DeletePostBtn id={params.id} onDelete={onDelete} />
-      </div>
-    }
-    </>
   )
 }
 

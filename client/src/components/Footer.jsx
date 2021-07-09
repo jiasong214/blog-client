@@ -5,7 +5,6 @@ import '../style/footer.scss';
 
 const Footer = () => {
   const history = useHistory();
-
   const { user, onLogout } = useAuth();
 
   const onClickLogout = () => {

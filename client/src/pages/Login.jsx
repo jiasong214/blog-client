@@ -19,7 +19,6 @@ const Login = () => {
     history.push('/');
   }
 
-  
   return (
     <div className="login">
       <h2 className="login__title">Admin</h2>

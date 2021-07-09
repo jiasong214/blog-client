@@ -5,6 +5,10 @@
   max-width: $max-width;
   margin: 30px auto;
 
+  .post-container {
+    border-bottom: 1px solid $light-gray;
+  }
+
   .post__title {
     font-size: 4.8rem;
     font-weight: 800;

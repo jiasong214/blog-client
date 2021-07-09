@@ -2,11 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../style/header.scss';
 
-const Header = ({changeCategory}) => {
+const Header = () => {
   return (
     <header className="header">
       <div>
-        <h1 className="header__title" onClick={() => changeCategory()}>
+        <h1 className="header__title">
           <Link to='/'>JIA</Link>
         </h1>
       </div>
