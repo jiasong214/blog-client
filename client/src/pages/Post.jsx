@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import Markdown from '../components/Markdown';
 import Comments from '../components/Comments';
 import EditPostBtn from '../components/EditPostBtn';
 import DeletePostBtn from '../components/DeletePostBtn';
 import '../style/post.scss';
+
 
 const Post = ({postService, changePostsByDelete}) => {
   const params = useParams();
@@ -16,7 +18,7 @@ const Post = ({postService, changePostsByDelete}) => {
   useEffect(() => {
     postService
       .getPostById(params.id)
-      .then((data) => setPost(...data))
+      .then((data) => setPost(data))
       .catch(console.error());
   }, [postService, params.id]);
 
@@ -32,12 +34,21 @@ const Post = ({postService, changePostsByDelete}) => {
     }
   };
 
+  const convertDate = (value) => {
+    const converted = new Date(value);
+    const year = converted.getFullYear();
+    const month = converted.toLocaleString('en', { month: 'long' });;
+    const date = converted.getDate();
+
+    return `${date} ${month}, ${year}`;
+  }
+
   return (
     <>
     <section className='post'>
       <h2 className="post__title">{post.title}</h2>
-      <span className="post__createAt">{post.createAt}</span>
-      <div className="post__text" dangerouslySetInnerHTML={{__html: post.text}} />
+      <span className="post__createdAt">{convertDate(post.createdAt)}</span>
+      <Markdown text={post.text} />
       <Comments />
     </section>
     {user && 

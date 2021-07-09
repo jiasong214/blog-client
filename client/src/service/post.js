@@ -28,19 +28,19 @@ export default class PostService {
     });
   }
 
-  async createPost(category, title, text) {
+  async createPost(category, title, subtitle, text) {
     return this.http.fetch(`/post`, {
       method: 'POST',
       headers: this.getHeaders(),
-      body: JSON.stringify({ category, title, text })
+      body: JSON.stringify({ category, title, subtitle, text })
     });
   }
 
-  async updatePost(id, category, title, text) {
+  async updatePost(id, category, title, subtitle, text) {
     return this.http.fetch(`/post/${id}`, {
       method: 'PUT',
       headers: this.getHeaders(),
-      body: JSON.stringify({ category, title, text })
+      body: JSON.stringify({ category, title, subtitle, text })
     });
   }
 

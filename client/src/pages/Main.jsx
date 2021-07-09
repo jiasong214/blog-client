@@ -7,7 +7,7 @@ import CreatePostBtn from '../components/CreatePostBtn';
 
 const Main = ({postService, posts, changeCategory}) => {
   //all categories for navigation list
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState();
   //user state from AuthContext
   const { user } = useAuth();
 

@@ -1,10 +1,19 @@
+@import "./global.scss";
+
 .navigation {
-  width: 10vw;
+  width: fit-content;
   position: fixed;
-  left: 90vw;
   top: 30vh;
+  left: 50vw;
+  transform: translateX(calc(390px + 5vw));
+
+  @media (max-width: calc(975px + 100px)) {
+    display: none;
+  }
 
   .navigation__list {
+    list-style: none;
+
     li {
       margin-bottom: 5px;
       font-size: 1.6rem;

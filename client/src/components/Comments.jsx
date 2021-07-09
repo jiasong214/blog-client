@@ -21,7 +21,7 @@ const Comments = () => {
     });
 
     commentRef.current.appendChild(utterances);
-  }, []);
+  }, [commentRef]);
 
   return (
     <div className='comments' ref={commentRef} />

@@ -3,6 +3,7 @@ import PostCard from './PostCard';
 import '../style/postCardsList.scss';
 
 const PostCardsList = ({posts}) => {
+  console.log(posts)
   return (
     <>
       {posts.length === 0 && <p className='posts-empty'>No Posts Yet</p>}
@@ -12,8 +13,8 @@ const PostCardsList = ({posts}) => {
             key={post.id}
             id={post.id}
             title={post.title}
-            createAt={post.createAt}
-            text={post.text} 
+            subtitle={post.subtitle} 
+            createdAt={post.createdAt}
           />
         ))}
       </ul>

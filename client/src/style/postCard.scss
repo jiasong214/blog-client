@@ -2,7 +2,7 @@
 
 .postCard {
   width: 100%;
-  padding: 30px 0;
+  padding: 30px 0 20px;
   border-bottom: 1px solid $light-gray;
 
   .postCard__title {
@@ -10,30 +10,26 @@
     font-weight: 800;
   }
 
-  .postCard__createAt {
+  .postCard__createdAt {
     display: block;
     margin-bottom: 10px;
     font-size: 1.4rem;
     color: gray;
   }
 
-  .postCard__preview {
+  .postCard__subtitle {
     margin-bottom: 15px;
     font-size: 1.6rem;
-  }
 
-  .postCard__comments {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
 
-    svg {
-      width: 18px;
-      margin-right: 5px;
-    }
-
-    div {
-      font-size: 1.4rem;
+    * {
+      all: unset;
+      color: black;
     }
   }
 }

@@ -1,28 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { useHistory } from 'react-router-dom';
+import Markdown from '../components/Markdown';
 import '../style/createPost.scss';
-import { Editor } from 'react-draft-wysiwyg';
-import { EditorState, convertToRaw, ContentState } from 'draft-js';
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import draftToHtml from 'draftjs-to-html';
-import htmlToDraft from 'html-to-draftjs';
 
 const CreatePost = ({postService, changePostsByCreate, changePostsByUpdate}) => {
   const history = useHistory();
   const params = useParams();
   const [formerData, setFormerData] = useState();
   const [postTitle, setPostTitle] = useState();
+  const [postSubtitle, setPostSubtitle] = useState();
   const [postCategory, setPostCategory] = useState();
-  const [editorState, setEditorState] = useState(EditorState.createEmpty());
-  
+  const [markdown, setMarkdown] = useState('');
 
   //UPDATE: if it's for update, set post's data
   useEffect(() => {
     if(params.id){
       postService
         .getPostById(params.id)
-        .then((data) => setFormerData(...data))
+        .then((data) => setFormerData(data))
         .catch(console.error());
     }
   }, [postService, params.id]);
@@ -30,33 +26,19 @@ const CreatePost = ({postService, changePostsByCreate, changePostsByUpdate}) => 
   //UPDATE: after formerData is set, set all input state with that.
   useEffect(() => {
     if(formerData){
-      //set title, category state
+      //set former state
       setPostTitle(formerData.title);
+      setPostSubtitle(formerData.subtitle);
       setPostCategory(formerData.category);
-
-      //convert html text to draft format and set state
-      const blocksFromHtml = htmlToDraft(formerData.text);
-      const { contentBlocks, entityMap } = blocksFromHtml;
-      const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap);
-      const editorState = EditorState.createWithContent(contentState);
-      setEditorState(editorState);
+      setMarkdown(formerData.text);
     }
   }, [formerData])
 
   //input handling
-  const onTitleChange = (event) => {
-    setPostTitle(event.target.value);
-  };
+  const onTitleChange = (event) => setPostTitle(event.target.value);
+  const onSubtitleChange = (event) => setPostSubtitle(event.target.value);
   const onCategoryChange = (event) => setPostCategory(event.target.value);
-  const onEditorStateChange = (editorState) => setEditorState(editorState);
-
-  //convert draft format to html format
-  const convertToHtml = (editorState) => {
-    const rawText = convertToRaw(editorState.getCurrentContent())
-    const HtmlConversion = draftToHtml(rawText);
-
-    return HtmlConversion;
-  }
+  const onMarkdownChange = (event) => setMarkdown(event.target.value);
 
   //convert category strings to array
   const convertToArray = (postCategory) => {
@@ -70,7 +52,7 @@ const CreatePost = ({postService, changePostsByCreate, changePostsByUpdate}) => 
       const pureStr = lowerStr.split("#");
 
       return pureStr[pureStr.length - 1];
-    })
+    }).toString();
   }
 
   //form submit
@@ -80,13 +62,14 @@ const CreatePost = ({postService, changePostsByCreate, changePostsByUpdate}) => 
     const post = {
       category: convertToArray(postCategory),
       title: postTitle,
-      text: convertToHtml(editorState)
+      subtitle: postSubtitle,
+      text: markdown
     }
 
     if(params.id){
     //UPDATE
       postService
-        .updatePost(params.id , post.category, post.title, post.text)
+        .updatePost(params.id , post.category, post.title, post.subtitle, post.text)
         .then((data) => changePostsByUpdate(params.id, data))
         .catch(console.error);
 
@@ -94,7 +77,7 @@ const CreatePost = ({postService, changePostsByCreate, changePostsByUpdate}) => 
     }else {
     //CREATE
       postService
-        .createPost(post.category, post.title, post.text)
+        .createPost(post.category, post.title, post.subtitle, post.text)
         .then((data) => changePostsByCreate(data))
         .catch(console.error);
 
@@ -102,47 +85,40 @@ const CreatePost = ({postService, changePostsByCreate, changePostsByUpdate}) => 
     }
   }
 
-
   return (
     <div className="createPost">
-      <form onSubmit={onSubmit}>
+      <div className="createPost-titlebox">
         <input 
           type="text" 
           className="createPost__title" 
-          placeholder="Title" 
+          placeholder="Post Title" 
           value={postTitle ? postTitle : ''}
-          onChange={(event) => onTitleChange(event)} 
+          onChange={onTitleChange} 
+        />
+        <input 
+          type="text" 
+          className="createPost__subtitle" 
+          placeholder="Post Subtitle" 
+          value={postSubtitle ? postSubtitle : ''}
+          onChange={onSubtitleChange} 
         />
         <input  
           type="text" 
           className="createPost__category" 
-          placeholder="#React #Javascript" 
+          placeholder="#Tag" 
           value={postCategory ? postCategory : ''} 
-          onChange={(event) => onCategoryChange(event)} 
+          onChange={onCategoryChange} 
         />
-        <Editor
-          wrapperClassName="createPost__wrapper"
-          editorClassName="createPost__editor"
-          
-          //language setting
-          localization={{ locale: "en" }}
-          //tool bar setting
-          toolbar={{
-            inline: { inDropdown: true },
-            list: { inDropdown: true },
-            textAlign: { inDropdown: true },
-            link: { inDropdown: true },
-            history: { inDropdown: true },
-            blockType: { inDropdown: true }
-          }}
-
-          //default state
-          editorState={editorState}
-          //update state event
-          onEditorStateChange={onEditorStateChange}
-        />
-        <button type='submit' className="createPost__submitBtn">Compost</button>
-      </form>
+        </div>
+      <div className="createPost-textbox">
+          <textarea onChange={onMarkdownChange} value={markdown}></textarea>
+          <div className="createPost__markdown">
+            <Markdown text={markdown} />
+          </div>
+        </div>
+      <div className="createPost-buttonbox">
+        <button onClick={onSubmit} className="createPost__submitBtn">Compost</button>
+      </div>
     </div>
   );
 }

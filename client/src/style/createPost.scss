@@ -1,54 +1,92 @@
 @import "./global.scss";
 
 .createPost {
-  width: $width;
-  max-width: $max-width;
-  margin: 30px auto;
+  .createPost-titlebox {
+    width: $width;
+    max-width: $max-width;
+    margin: 20px auto 0;
+    position: relative;
 
-  .createPost__title {
-    all: unset;
-    display: block;
-    width: 100%;
-    margin-bottom: 10px;
+    .createPost__title {
+      all: unset;
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+      border-bottom: 1px solid $light-gray;
+      font-size: 3.6rem;
+      font-weight: 800;
+    }
+
+    .createPost__subtitle {
+      @extend .createPost__title;
+
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    .createPost__category {
+      all: unset;
+      box-sizing: border-box;
+      display: block;
+      width: 100%;
+      padding: 5px 10px;
+      border-radius: 20px;
+      background: $light-gray;
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+  }
+
+  .createPost-textbox {
+    width: 100vw;
+    margin: 20px auto 0;
     border-bottom: 1px solid $light-gray;
-    font-size: 3.6rem;
-    font-weight: 800;
+    border-top: 1px solid $light-gray;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+
+    textarea,
+    .createPost__markdown {
+      width: 100%;
+      height: calc(100vh - 145px);
+      overflow: scroll;
+      padding: 20px;
+      font-size: 1.8rem;
+    }
+
+    textarea {
+      border: none;
+      outline: none;
+      background: rgb(29, 29, 29);
+      color: white;
+    }
   }
 
-  .createPost__category {
-    all: unset;
-    box-sizing: border-box;
-    display: block;
-    width: 100%;
-    padding: 5px 10px;
-    border-radius: 20px;
-    background: rgb(245, 245, 245);
-    font-size: 1.4rem;
-    font-weight: 600;
-  }
+  .createPost-buttonbox {
+    width: $width;
+    max-width: $max-width;
+    margin: 10px auto;
 
-  .createPost__wrapper {
-    height: calc(100vh - 270px);
-    margin: 10px 0;
-  }
+    .createPost__submitBtn {
+      all: unset;
+      display: block;
+      width: fit-content;
+      margin-left: auto;
+      padding: 10px 100px;
+      background: $light-gray;
+      border-radius: 20px;
+      font-size: 1.4rem;
+      color: white;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: 0.3s;
 
-  .createPost__editor {
-    height: calc(100% - 47px);
-    border: 1px solid $light-gray;
-    padding: 10px;
-    font-size: 1.6rem;
-    line-height: 1;
-  }
-
-  .createPost__submitBtn {
-    all: unset;
-    display: block;
-    padding: 10px 100px;
-    margin-left: auto;
-    background: black;
-    border-radius: 20px;
-    font-size: 1.6rem;
-    color: white;
-    text-align: center;
+      &:hover {
+        background: black;
+        transition: 0.3s;
+      }
+    }
   }
 }

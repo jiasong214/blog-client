@@ -10,7 +10,7 @@ const Navigation = ({categories, changeCategory}) => {
             key={index} 
             onClick={() => changeCategory(category)}
           >
-            {category}
+            #{category}
           </li>
         ))}
       </ul>
