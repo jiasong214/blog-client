@@ -1,14 +1,10 @@
-import React, { useState, useEffect, useCallback, useMemo, createRef, createContext, useImperativeHandle, } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, createContext } from 'react';
 import { useContext } from 'react';
 
 export const AuthContext = createContext({});
-const tokenRef = createRef();
-
 
 export const AuthProvider = ({authService, children}) => {
   const [user, setUser] = useState(undefined);
-
-  useImperativeHandle(tokenRef, () => (user ? user.token : undefined));
 
   useEffect(() => {
     authService
@@ -40,5 +36,4 @@ export const AuthProvider = ({authService, children}) => {
   )
 }
 
-export const fetchToken = () => tokenRef.current;
 export const useAuth = () => useContext(AuthContext);
