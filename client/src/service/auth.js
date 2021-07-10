@@ -1,29 +1,22 @@
 export default class AuthService {
-  constructor (http, tokenStorage) {
+  constructor (http) {
     this.http = http;
-    this.tokenStorage = tokenStorage;
   }
 
   async login(username, password) {
-    const data =  await this.http.fetch(`/auth/login`, {
+    return await this.http.fetch(`/auth/login`, {
       method: 'POST',
       body: JSON.stringify({ username, password })
     });
-    this.tokenStorage.saveToken(data.token);
-
-    return data;
   }
 
-  async me() {
-    const token = await this.tokenStorage.getToken();
-
+  async me() { 
     return this.http.fetch(`/auth/me`, {
       method: 'GET',
-      headers: { Authorization: `Bearer ${token}` }
     });
   }
 
   async logout() {
-    this.tokenStorage.clearToken();
+    // this.tokenStorage.clearToken();
   }
 }

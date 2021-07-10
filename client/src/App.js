@@ -10,8 +10,6 @@ import CreatePost from './pages/CreatePost';
 function App({postService}) {
   const [posts, setPosts] = useState([]);
 
-  console.log("App");
-
   //update post list depend on selected category
   useEffect(() => {
     postService
@@ -20,7 +18,7 @@ function App({postService}) {
       .catch(console.error())
   }, [postService]);
 
-  //change posts state when post is deleted
+  //change posts stateb with CRUD actions
   const changePostsByDelete = (id) => {
     setPosts(() => posts.filter((post) => parseInt(post.id) !== parseInt(id)));
   };
@@ -29,12 +27,10 @@ function App({postService}) {
     setPosts(() => [post, ...posts]);
   };
 
+  //오류 수정하기
   const changePostsByUpdate = (id, updated) => {
-    const updatedPost = posts.map((post) => (
-      parseInt(post.id) === parseInt(id) ? updated : post
-    ));
-    
-    setPosts(updatedPost);
+    console.log("Update")
+    setPosts(() => posts.map((post) => parseInt(post.id) === parseInt(id) ? updated : post));
   };
 
 
@@ -47,7 +43,8 @@ function App({postService}) {
           <Route exact path="/">
             <Main 
               postService={postService}  
-              posts={posts} />
+              posts={posts} 
+            />
           </Route>
 
           {/* create post page */}
@@ -55,14 +52,16 @@ function App({postService}) {
             <CreatePost 
               postService={postService} 
               changePostsByCreate={changePostsByCreate}
-              changePostsByUpdate={changePostsByUpdate} />
+              changePostsByUpdate={changePostsByUpdate}
+            />
           </Route>
 
           {/* post(id) page */}
           <Route exact path="/post/:id">
             <Post 
               postService={postService} 
-              changePostsByDelete={changePostsByDelete} />
+              changePostsByDelete={changePostsByDelete} 
+            />
           </Route>
 
           {/* edit post(id)  */}

@@ -5,10 +5,6 @@
   max-width: $max-width;
   margin: 30px auto;
 
-  .post-container {
-    border-bottom: 1px solid $light-gray;
-  }
-
   .post__title {
     font-size: 4.8rem;
     font-weight: 800;
@@ -16,8 +12,13 @@
 
   .post__createdAt {
     display: block;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     font-size: 1.4rem;
     color: gray;
+  }
+
+  .post__contents {
+    border-top: 1px solid $light-gray;
+    border-bottom: 1px solid $light-gray;
   }
 }

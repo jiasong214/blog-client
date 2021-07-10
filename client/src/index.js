@@ -5,10 +5,6 @@ import { AuthProvider } from './context/AuthContext';
 import HttpClient from './network/http';
 import PostService from './service/post.js';
 import AuthService from './service/auth';
-import TokenStorage from './db/token';
-
-//class that manage token in localStorage
-const tokenStorage = new TokenStorage();
 
 //basic url from env file
 const baseURL = process.env.REACT_APP_BASE_URL;
@@ -17,11 +13,8 @@ const baseURL = process.env.REACT_APP_BASE_URL;
 const httpClient = new HttpClient(baseURL);
 
 //class that controll all post/auth related APIs
-const postService = new PostService(httpClient, tokenStorage);
-const authService = new AuthService(httpClient, tokenStorage);
-
-console.log("index");
-
+const postService = new PostService(httpClient);
+const authService = new AuthService(httpClient);
 
 ReactDOM.render(
   <React.StrictMode>

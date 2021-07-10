@@ -11,6 +11,7 @@ export default class HttpClient {
         'Content-Type': 'application/json',
         ...options.headers,
       },
+      credentials: 'include',
     });
 
     //fomat data to json, and catch error

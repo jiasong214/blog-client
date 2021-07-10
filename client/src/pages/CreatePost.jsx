@@ -50,7 +50,7 @@ const CreatePost = ({postService, changePostsByCreate, changePostsByUpdate}) => 
     if(params.id){
     //UPDATE
       postService
-        .updatePost(params.id , post.title, post.subtitle, post.text)
+        .updatePost(params.id, post.title, post.subtitle, post.text)
         .then((data) => changePostsByUpdate(params.id, data))
         .catch(console.error);
 

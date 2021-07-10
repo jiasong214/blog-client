@@ -44,9 +44,9 @@ const Post = ({postService, changePostsByDelete}) => {
 
   return (
     <section className='post'>
-      <div className="post-container">
-        <h2 className="post__title">{post.title}</h2>
-        <span className="post__createdAt">{convertDate(post.createdAt)}</span>
+      <h2 className="post__title">{post.title}</h2>
+      <span className="post__createdAt">{convertDate(post.createdAt)}</span>
+      <div className="post__contents">
         <Markdown text={post.text} />
       </div>
       {user && <PostSetting id={params.id} onDelete={onDelete} />}

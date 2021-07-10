@@ -1,19 +1,20 @@
-import React, { useState, useEffect, useCallback, useMemo, createContext } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, createRef, createContext, useImperativeHandle, } from 'react';
 import { useContext } from 'react';
 
 export const AuthContext = createContext({});
+const tokenRef = createRef();
+
 
 export const AuthProvider = ({authService, children}) => {
   const [user, setUser] = useState(undefined);
+
+  useImperativeHandle(tokenRef, () => (user ? user.token : undefined));
 
   useEffect(() => {
     authService
       .me()
       .then((data) => setUser(data))
       .catch(console.error);
-
-      console.log("AuthProvider useEffect")
-
   }, [authService]);
 
   const onLogin = useCallback(async (username, password) => {
@@ -39,4 +40,5 @@ export const AuthProvider = ({authService, children}) => {
   )
 }
 
+export const fetchToken = () => tokenRef.current;
 export const useAuth = () => useContext(AuthContext);
