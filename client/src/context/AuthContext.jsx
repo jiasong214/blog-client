@@ -9,14 +9,13 @@ export const AuthProvider = ({authService, children}) => {
   useEffect(() => {
     authService
       .me()
-      .then((data) => setUser(data))
-      .catch(console.error);
+      .then((data) => setUser(data));
   }, [authService]);
 
   const onLogin = useCallback(async (username, password) => {
     authService
       .login(username, password)
-      .then((data) => setUser(data));
+      .then((data) => setUser(data))
   }, [authService])
 
   const onLogout = useCallback(async () => {

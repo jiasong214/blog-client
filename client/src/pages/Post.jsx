@@ -49,7 +49,7 @@ const Post = ({postService, changePostsByDelete}) => {
       <div className="post__contents">
         <Markdown text={post.text} />
       </div>
-      {user && <PostSetting id={params.id} onDelete={onDelete} />}
+      {user && user.token && <PostSetting id={params.id} onDelete={onDelete} />}
       <Comments />
     </section>
   )

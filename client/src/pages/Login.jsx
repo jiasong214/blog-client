@@ -15,8 +15,9 @@ const Login = () => {
   const onSubmit = (event) => {
     event.preventDefault();
 
-    onLogin(username, password);
-    history.push('/');
+    //fix: login fail notice
+    onLogin(username, password)
+    history.push('/')
   }
 
   return (

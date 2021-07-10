@@ -16,9 +16,9 @@ const Footer = () => {
 
   return (
     <footer className="footer">
-       {user ? 
+       {user ? user.token ? 
           <div className='footer__logout' onClick={onClickLogout}>Logout Admin</div> : 
-          <Link className="footer__login" to='/login'>Admin account</Link>
+          <Link className="footer__login" to='/login'>Admin account</Link> : ''
         }
       <p className="footer__copyright">
         &copy; 2021 Jia Song

@@ -4,9 +4,15 @@ export default class AuthService {
   }
 
   async login(username, password) {
-    return await this.http.fetch(`/auth/login`, {
+    return this.http.fetch(`/auth/login`, {
       method: 'POST',
       body: JSON.stringify({ username, password })
+    });
+  }
+
+  async logout() {
+    return this.http.fetch(`/auth/logout`, {
+      method: 'POST',
     });
   }
 
@@ -14,9 +20,5 @@ export default class AuthService {
     return this.http.fetch(`/auth/me`, {
       method: 'GET',
     });
-  }
-
-  async logout() {
-    // this.tokenStorage.clearToken();
   }
 }

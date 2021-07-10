@@ -11,7 +11,7 @@ const Main = ({ posts }) => {
     <main className='main'>
       <Intro />
       <PostCardsList posts={posts} />
-      {user && <CreatePostBtn />}
+      {user && user.token &&  <CreatePostBtn /> }
     </main>
   )
 }

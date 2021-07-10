@@ -26,7 +26,8 @@ export default class HttpClient {
     if (res.status > 299 || res.status < 200) {
       const message =
         data && data.message ? data.message : 'http error!';
-      throw new Error(message);
+
+      return new Error(message);
     }
 
     //if everything is okay, return json data
