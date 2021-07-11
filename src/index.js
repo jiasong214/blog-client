@@ -7,7 +7,7 @@ import PostService from './service/post.js';
 import AuthService from './service/auth';
 
 //basic url from env file
-const baseURL = process.env.REACT_APP_BASE_URL;
+const baseURL = 'https://blog-by-jia.herokuapp.com/';
 
 //class that has http common option and error handling
 const httpClient = new HttpClient(baseURL);
