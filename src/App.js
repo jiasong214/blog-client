@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Main from './pages/Main';
@@ -36,45 +36,43 @@ function App({postService}) {
 
   return (
     <div className="App">
-      <BrowserRouter>
-        <Header />
-        <Switch>
-          {/* main: all posts */}
-          <Route exact path="/">
-            <Main 
-              postService={postService}  
-              posts={posts} 
-            />
-          </Route>
+      <Header />
+      <Switch>
+        {/* main: all posts */}
+        <Route exact path="/">
+          <Main 
+            postService={postService}  
+            posts={posts} 
+          />
+        </Route>
 
-          {/* create post page */}
-          <Route exact path="/post/compose">
-            <CreatePost 
-              postService={postService} 
-              changePostsByCreate={changePostsByCreate}
-              changePostsByUpdate={changePostsByUpdate}
-            />
-          </Route>
+        {/* create post page */}
+        <Route exact path="/post/compose">
+          <CreatePost 
+            postService={postService} 
+            changePostsByCreate={changePostsByCreate}
+            changePostsByUpdate={changePostsByUpdate}
+          />
+        </Route>
 
-          {/* post(id) page */}
-          <Route exact path="/post/:id">
-            <Post 
-              postService={postService} 
-              changePostsByDelete={changePostsByDelete} 
-            />
-          </Route>
+        {/* post(id) page */}
+        <Route exact path="/post/:id">
+          <Post 
+            postService={postService} 
+            changePostsByDelete={changePostsByDelete} 
+          />
+        </Route>
 
-          {/* edit post(id)  */}
-          <Route exact path="/post/:id/edit">
-            <CreatePost postService={postService} />
-          </Route>
+        {/* edit post(id)  */}
+        <Route exact path="/post/:id/edit">
+          <CreatePost postService={postService} />
+        </Route>
 
-          {/* login page  */}
-          <Route exact path="/login" component={Login} />
+        {/* login page  */}
+        <Route exact path="/login" component={Login} />
 
-        </Switch>
-        <Footer />
-      </BrowserRouter>
+      </Switch>
+      <Footer />
     </div>
   );
 }
