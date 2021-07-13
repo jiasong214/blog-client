@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import Markdown from '../components/Markdown';
 import PostSetting from '../components/PostSetting';
 import Comments from '../components/Comments';
+import Loading from '../components/Loading';
 import '../style/post.scss';
 
 
@@ -43,15 +44,20 @@ const Post = ({postService, changePostsByDelete}) => {
   }
 
   return (
-    <section className='post'>
-      <h2 className="post__title">{post.title}</h2>
-      <span className="post__createdAt">{convertDate(post.createdAt)}</span>
-      <div className="post__contents">
-        <Markdown text={post.text} />
-      </div>
-      {user && user.token && <PostSetting id={params.id} onDelete={onDelete} />}
-      <Comments />
-    </section>
+    <>
+    {post.length === 0 ? <Loading /> :
+      (<section className='post'>
+        <h2 className="post__title">{post.title}</h2>
+        <span className="post__createdAt">{convertDate(post.createdAt)}</span>
+        <div className="post__contents">
+          <Markdown text={post.text} />
+        </div>
+        {user && user.token && <PostSetting id={params.id} onDelete={onDelete} />}
+        <Comments />
+      </section>
+      )
+    }
+    </>
   )
 }
 

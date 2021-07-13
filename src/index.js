@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import App from './App';
 import { AuthProvider } from './context/AuthContext';
 import HttpClient from './network/http';
@@ -22,11 +22,11 @@ const routeBase = '/blog-client';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter basename={routeBase}>
+    <HashRouter basename={routeBase}>
       <AuthProvider authService={authService}>
         <App postService={postService} />
       </AuthProvider>
-    </BrowserRouter>
+    </HashRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

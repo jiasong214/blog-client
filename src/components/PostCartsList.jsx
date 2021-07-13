@@ -1,11 +1,12 @@
 import React from 'react';
 import PostCard from './PostCard';
+import Loading from './Loading';
 import '../style/postCardsList.scss';
 
 const PostCardsList = ({posts}) => {
   return (
     <>
-      {posts.length === 0 && <p className='postCardsList-empty'>No Posts Yet :(</p>}
+      {posts.length === 0 && <Loading />}
       <ul className="postCardsList">
         {posts.map((post) => (
           <PostCard 
