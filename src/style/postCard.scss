@@ -2,22 +2,45 @@
 
 .postCard {
   width: 100%;
-  padding: 30px 0;
-  border-bottom: 1px solid $light-gray;
+  padding: 50px 0;
 
   .postCard__title {
-    font-size: 3.6rem;
+    font-family: "Playfair Display", serif;
+    font-size: 4.8rem;
     font-weight: 800;
+    text-align: center;
   }
 
   .postCard__createdAt {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     font-size: 1.4rem;
-    color: gray;
+    color: black;
+    text-align: center;
   }
 
   .postCard__subtitle {
+    margin-bottom: 20px;
     font-size: 1.4rem;
+    text-align: center;
+  }
+
+  .postCard__readBtn {
+    font-size: 1.4rem;
+    text-align: center;
+    position: relative;
+
+    &::before {
+      display: block;
+      content: "";
+      width: 50px;
+      height: 10px;
+      background: #ffde00;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: -1;
+    }
   }
 }

@@ -9,6 +9,7 @@ import AuthService from './service/auth';
 
 //basic api url
 const baseURL = 'https://jia-blog.herokuapp.com';
+// const baseURL = `http://localhost:8080`;
 
 //class that has http common option and error handling
 const httpClient = new HttpClient(baseURL);

@@ -36,7 +36,7 @@ function App({postService}) {
 
   return (
     <div className="App">
-      <Header />
+      {/* <Header /> */}
       <Switch>
         {/* main: all posts */}
         <Route exact path="/">
