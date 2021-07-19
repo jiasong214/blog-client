@@ -15,17 +15,17 @@ export default class PostService {
     });
   }
 
-  async createPost(title, subtitle, text) {
+  async createPost(title, text) {
     return this.http.fetch(`/posts`, {
       method: 'POST',
-      body: JSON.stringify({ title, subtitle, text })
+      body: JSON.stringify({ title, text })
     });
   }
 
-  async updatePost(id, title, subtitle, text) {
+  async updatePost(id, title, text) {
     return this.http.fetch(`/posts/${id}`, {
       method: 'PUT',
-      body: JSON.stringify({ title, subtitle, text })
+      body: JSON.stringify({ title, text })
     });
   }
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import BackBtn from '../components/BackBtn';
 import Markdown from '../components/Markdown';
 import PostSetting from '../components/PostSetting';
 import Comments from '../components/Comments';
@@ -45,10 +46,11 @@ const Post = ({postService, changePostsByDelete}) => {
 
   return (
     <>
+    <BackBtn />
     {post.length === 0 ? <Loading /> :
       (<section className='post'>
         <h2 className="post__title">{post.title}</h2>
-        <span className="post__createdAt">{convertDate(post.createdAt)}</span>
+        <span className="post__createdAt">Posted on {convertDate(post.createdAt)}</span>
         <div className="post__contents">
           <Markdown text={post.text} />
         </div>

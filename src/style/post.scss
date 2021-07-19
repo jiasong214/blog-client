@@ -13,8 +13,17 @@
 
   .post__createdAt {
     display: block;
-    padding-bottom: 20px;
     font-size: 1.4rem;
     color: gray;
+  }
+
+  .post__contents {
+    margin-bottom: 30px;
+  }
+
+  @media (max-width: 768px) {
+    .post__title {
+      font-size: 3.6rem;
+    }
   }
 }

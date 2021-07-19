@@ -13,16 +13,16 @@
 
   .postCard__createdAt {
     display: block;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     font-size: 1.4rem;
     color: black;
     text-align: center;
   }
 
-  .postCard__subtitle {
-    margin-bottom: 20px;
+  .postCard__preview {
+    margin-bottom: 15px;
     font-size: 1.4rem;
-    text-align: center;
+    text-indent: calc(1.4rem * 4);
   }
 
   .postCard__readBtn {
@@ -33,7 +33,7 @@
     &::before {
       display: block;
       content: "";
-      width: 50px;
+      width: 140px;
       height: 10px;
       background: #ffde00;
       position: absolute;
@@ -41,6 +41,12 @@
       left: 50%;
       transform: translateX(-50%);
       z-index: -1;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .postCard__title {
+      font-size: 3.6rem;
     }
   }
 }

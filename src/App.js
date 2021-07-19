@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Header from './components/Header';
 import Footer from './components/Footer';
 import Main from './pages/Main';
 import Post from './pages/Post';
@@ -36,7 +35,6 @@ function App({postService}) {
 
   return (
     <div className="App">
-      {/* <Header /> */}
       <Switch>
         {/* main: all posts */}
         <Route exact path="/">

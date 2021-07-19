@@ -4,6 +4,7 @@ import Loading from './Loading';
 import '../style/postCardsList.scss';
 
 const PostCardsList = ({posts}) => {
+
   return (
     <>
       {posts.length === 0 && <Loading />}
@@ -13,8 +14,8 @@ const PostCardsList = ({posts}) => {
             key={post.id}
             id={post.id}
             title={post.title}
-            subtitle={post.subtitle} 
             createdAt={post.createdAt}
+            text={post.text} 
           />
         ))}
       </ul>
