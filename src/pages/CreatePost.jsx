@@ -52,11 +52,13 @@ const CreatePost = ({postService, changePostsByCreate, changePostsByUpdate}) => 
     //if title is not filled out, return
     if(!validateTitle(title)) return;
 
+
     if(params.id){
     //UPDATE
       postService
         .updatePost(params.id, title, markdown)
-        .then((data) => changePostsByUpdate(params.id, data))
+        // .then((data) => changePostsByUpdate(params.id, data))
+        // changePostsByCreate로 연결이 안됨.
         .catch(console.error);
 
       history.push(`/post/${params.id}`);

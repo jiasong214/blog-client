@@ -8,8 +8,8 @@ import PostService from './service/post.js';
 import AuthService from './service/auth';
 
 //basic api url
-// const baseURL = 'https://jia-blog.herokuapp.com';
-const baseURL = `http://localhost:8080`;
+const baseURL = 'https://jia-blog.herokuapp.com';
+// const baseURL = `http://localhost:8080`;
 
 //class that has http common option and error handling
 const httpClient = new HttpClient(baseURL);
@@ -18,12 +18,12 @@ const httpClient = new HttpClient(baseURL);
 const postService = new PostService(httpClient);
 const authService = new AuthService(httpClient);
 
-//basic url
-const routeBase = '/blog-client';
+// //basic url
+// const routeBase = '/blog-client';
 
 ReactDOM.render(
   <React.StrictMode>
-    <HashRouter basename={routeBase}>
+    <HashRouter>
       <AuthProvider authService={authService}>
         <App postService={postService} />
       </AuthProvider>

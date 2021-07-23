@@ -18,7 +18,8 @@
   }
 
   .post__contents {
-    margin-bottom: 30px;
+    padding-bottom: 100px;
+    border-bottom: 1px solid $light-gray;
   }
 
   @media (max-width: 768px) {

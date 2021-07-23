@@ -26,9 +26,8 @@ function App({postService}) {
     setPosts(() => [post, ...posts]);
   };
 
-  //오류 수정하기
+
   const changePostsByUpdate = (id, updated) => {
-    console.log("Update")
     setPosts(() => posts.map((post) => parseInt(post.id) === parseInt(id) ? updated : post));
   };
 

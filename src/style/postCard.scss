@@ -2,25 +2,47 @@
 
 .postCard {
   width: 100%;
-  padding: 50px 0;
+  padding: 70px 0;
+  position: relative;
 
   .postCard__title {
     font-family: "Playfair Display", serif;
     font-size: 4.8rem;
     font-weight: 800;
     text-align: center;
+
+    @media (max-width: 768px) {
+      font-size: 3.2rem;
+    }
   }
 
-  .postCard__createdAt {
-    display: block;
-    margin-bottom: 15px;
-    font-size: 1.4rem;
-    color: black;
-    text-align: center;
+  .postCard-container {
+    width: fit-content;
+    margin: 0 auto 30px;
+    display: flex;
+    align-items: center;
+
+    > * {
+      display: block;
+      font-size: 1.4rem;
+      margin-right: 5px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    .postCard__dot {
+      width: 3px;
+      height: 3px;
+
+      background: black;
+      border-radius: 50%;
+    }
   }
 
   .postCard__preview {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     font-size: 1.4rem;
     text-indent: calc(1.4rem * 4);
   }
@@ -41,12 +63,6 @@
       left: 50%;
       transform: translateX(-50%);
       z-index: -1;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .postCard__title {
-      font-size: 3.6rem;
     }
   }
 }

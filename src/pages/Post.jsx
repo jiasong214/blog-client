@@ -23,6 +23,7 @@ const Post = ({postService, changePostsByDelete}) => {
       .catch(console.error());
   }, [postService, params.id]);
 
+  //최적화하기
   //delete the post
   const onDelete = (id) => {
     if (window.confirm('Do you want to delete this post?')) {

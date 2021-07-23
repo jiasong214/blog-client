@@ -4,20 +4,26 @@ import Loading from './Loading';
 import '../style/postCardsList.scss';
 
 const PostCardsList = ({posts}) => {
+  let index = posts.length + 1;
 
   return (
     <>
       {posts.length === 0 && <Loading />}
       <ul className="postCardsList">
-        {posts.map((post) => (
-          <PostCard 
-            key={post.id}
-            id={post.id}
-            title={post.title}
-            createdAt={post.createdAt}
-            text={post.text} 
-          />
-        ))}
+        {posts.map((post) => {
+          index --;
+
+          return (
+            <PostCard 
+              key={post.id}
+              id={post.id}
+              index={index}
+              title={post.title}
+              createdAt={post.createdAt}
+              text={post.text} 
+            />
+          )  
+        })}
       </ul>
     </>
   )
