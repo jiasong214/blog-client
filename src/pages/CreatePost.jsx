@@ -5,7 +5,7 @@ import BackBtn from '../components/BackBtn';
 import Markdown from '../components/Markdown';
 import '../style/createPost.scss';
 
-const CreatePost = ({postService, changePostsByCreate, changePostsByUpdate}) => {
+const CreatePost = ({postService, createPost, updatePost}) => {
   const history = useHistory();
   const params = useParams();
   const [formerData, setFormerData] = useState();
@@ -52,12 +52,11 @@ const CreatePost = ({postService, changePostsByCreate, changePostsByUpdate}) => 
     //if title is not filled out, return
     if(!validateTitle(title)) return;
 
-
     if(params.id){
     //UPDATE
       postService
         .updatePost(params.id, title, markdown)
-        // .then((data) => changePostsByUpdate(params.id, data))
+        // .then((data) => updatePost(params.id, data))
         // changePostsByCreate로 연결이 안됨.
         .catch(console.error);
 
@@ -66,7 +65,7 @@ const CreatePost = ({postService, changePostsByCreate, changePostsByUpdate}) => 
     //CREATE
       postService
         .createPost(title, markdown)
-        .then((data) => changePostsByCreate(data))
+        .then((data) => createPost(data))
         .catch(console.error);
 
       history.push("/");

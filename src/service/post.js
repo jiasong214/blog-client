@@ -3,9 +3,9 @@ export default class PostService {
     this.http = http;
   }
 
-  async getPosts() {
-    return this.http.fetch(`/posts`, {
-      method: 'GET',
+  async getPosts(start) {
+    return this.http.fetch(`/posts/start=${start}`, {
+      method: 'GET'
     });
   }
 

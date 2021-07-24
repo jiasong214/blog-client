@@ -9,7 +9,7 @@ import Loading from '../components/Loading';
 import '../style/post.scss';
 
 
-const Post = ({postService, changePostsByDelete}) => {
+const Post = ({postService, deletePost}) => {
   const params = useParams();
   const history = useHistory();
   const [post, setPost] = useState([]);
@@ -29,7 +29,7 @@ const Post = ({postService, changePostsByDelete}) => {
     if (window.confirm('Do you want to delete this post?')) {
       postService
         .deletePost(id)
-        .then(() => changePostsByDelete(id))
+        .then(() => deletePost(id))
         .catch(console.error());
       
       history.push("/");
