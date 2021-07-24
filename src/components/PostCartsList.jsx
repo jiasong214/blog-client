@@ -3,8 +3,8 @@ import PostCard from './PostCard';
 import Loading from './Loading';
 import '../style/postCardsList.scss';
 
-const PostCardsList = ({posts, total}) => {
-  let index = parseInt(total.count) + 1;
+const PostCardsList = ({posts}) => {
+  let index = posts.length + 1;
 
   return (
     <>
