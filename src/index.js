@@ -18,8 +18,6 @@ const httpClient = new HttpClient(baseURL);
 const postService = new PostService(httpClient);
 const authService = new AuthService(httpClient);
 
-// //basic url
-// const routeBase = '/blog-client';
 
 ReactDOM.render(
   <React.StrictMode>

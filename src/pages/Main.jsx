@@ -1,38 +1,29 @@
-import React, { useEffect, useCallback, useRef } from 'react';
+import React, { useCallback } from 'react';
 import { useAuth } from '../context/AuthContext';
+import useInfiniteScroll from '../hooks/useInfitineScroll';
 import Intro from '../components/Intro';
 import PostCardsList from '../components/PostCartsList';
 import CreatePostBtn from '../components/CreatePostBtn';
 
-const Main = ({ posts, updateCurrentPostIndex }) => {
+const Main = ({ posts, total, updateCurrentPostIndex }) => {
   const { user } = useAuth();
-  const loader = useRef(null);
 
-  //when loader touch a bottom, change posts number. (to get more posts in usePosts)
-  const handleObserver = useCallback((entries) => {
+  //when target touch a bottom, update post index. (to get more posts in usePosts)
+  const onIntersect = useCallback((entries) => {
+    if(posts.length >= total) return;
+
     const target = entries[0];
-    if (target.isIntersecting) updateCurrentPostIndex();
-  }, []);
+    if (target.isIntersecting) updateCurrentPostIndex(posts.length);
+  }, [posts]);
 
-  //create observer for infinite scrolling
-  useEffect(() => {
-    const option = {
-      root: null,
-      rootMargin: "20px",
-      threshold: 0
-    };
-
-    const observer = new IntersectionObserver(handleObserver, option);
-    if (loader.current) observer.observe(loader.current);
-  }, [handleObserver]);
-  
+  const { setTarget } = useInfiniteScroll({onIntersect});
 
   return (
     <main className='main'>
       <Intro />
-      <PostCardsList posts={posts} />
+      <PostCardsList posts={posts} total={total} />
       {user && user.token &&  <CreatePostBtn /> }
-      <div ref={loader}/>
+      <div ref={setTarget}/>
     </main>
   )
 }

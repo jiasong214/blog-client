@@ -8,7 +8,6 @@ const usePost = ({postService}) => {
   const [total, setTotal] = useState(0);
   const [ currentPostIndex, setCurrentPostIndex ] = useState(0);
 
-
   //load new data whenever currentPostIndex is changed
   useEffect(() => {
     setLoading(true);
@@ -17,7 +16,7 @@ const usePost = ({postService}) => {
     postService
       .getPosts(currentPostIndex)
       .then(result => {
-        setTotal(result.total.count);
+        setTotal(result.total);
         return result.data;
       })
       .then((data) => setPosts((prev) => [...new Set([...prev, ...data])]))
@@ -25,15 +24,10 @@ const usePost = ({postService}) => {
       .catch(() => setError(true));
   }, [postService, currentPostIndex])
 
-  
-  let i = 1;
-
-  const updateCurrentPostIndex = () => {
-    if(total > 0 && total / 4 < i) return;
-
-    setCurrentPostIndex(currentPostIndex + i*4);
-    i++;
-    console.log('Getting more posts...');
+  //update current index to get more post
+  const updateCurrentPostIndex = (currentNum) => {
+    setCurrentPostIndex(currentNum);
+    console.log(`Getting more posts from index ${currentNum}...`);
   }
 
   const deletePost = (id) => {
