@@ -1,7 +1,7 @@
 import React, { useState, lazy, Suspense, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Footer from './components/Footer';
-// import usePost from './hooks/usePost';
+import usePost from './hooks/usePost';
 
 const Main = lazy(() => import('./pages/Main'));
 const Post = lazy(() => import('./pages/Post'));
@@ -9,27 +9,45 @@ const Login = lazy(() => import('./pages/Login'));
 const CreatePost = lazy(() => import('./pages/CreatePost'));
 
 function App({postService}) {
-  const [posts, setPosts] = useState([]);
+  // const [ currentPostIndex, setCurrentPostIndex ] = useState(0)
+  const { 
+    posts, 
+    createPost, 
+    updatePost, 
+    deletePost,
+    updateCurrentPostIndex,
+   } = usePost({postService});
 
-  useEffect(() => {
-    postService
-      .getPosts()
-      .then((data) => setPosts((posts) => [...new Set([...posts, ...data])]))
-      .catch(console.error);
+  // console.log('App is re-rendered');
 
-  }, [postService]);
+  // const updateCurrentPostIndex = () => {
+  //   setCurrentPostIndex(currentPostIndex + 4);
+  //   console.log(currentPostIndex)
 
-  const deletePost = (id) => {
-    setPosts(() => posts.filter((post) => parseInt(post.id) !== parseInt(id)));
-  };
+  //   console.log("load more...")
+  // }
 
-  const createPost = (post) => {
-    setPosts(() => [post, ...posts]);
-  };
+  // const [posts, setPosts] = useState([]);
 
-  const updatePost = (id, updated) => {
-    setPosts(() => posts.map((post) => parseInt(post.id) === parseInt(id) ? updated : post));
-  };
+  // useEffect(() => {
+  //   postService
+  //     .getPosts()
+  //     .then((data) => setPosts((posts) => [...new Set([...posts, ...data])]))
+  //     .catch(console.error);
+
+  // }, [postService]);
+
+  // const deletePost = (id) => {
+  //   setPosts(() => posts.filter((post) => parseInt(post.id) !== parseInt(id)));
+  // };
+
+  // const createPost = (post) => {
+  //   setPosts(() => [post, ...posts]);
+  // };
+
+  // const updatePost = (id, updated) => {
+  //   setPosts(() => posts.map((post) => parseInt(post.id) === parseInt(id) ? updated : post));
+  // };
 
 
   return (
@@ -42,6 +60,7 @@ function App({postService}) {
             <Main 
               postService={postService}  
               posts={posts}
+              updateCurrentPostIndex={updateCurrentPostIndex}
             />
           </Route>
 

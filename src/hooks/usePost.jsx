@@ -1,28 +1,40 @@
 import { useState, useEffect } from 'react';
 
 
-const usePost = ({postService, postsNumber}) => {
+const usePost = ({postService}) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [posts, setPosts] = useState([]);
   const [total, setTotal] = useState(0);
+  const [ currentPostIndex, setCurrentPostIndex ] = useState(0);
 
-  //load new data whenever postsNumber is changed
+
+  //load new data whenever currentPostIndex is changed
   useEffect(() => {
     setLoading(true);
     setError(false);
 
     postService
-      .getPosts(postsNumber)
+      .getPosts(currentPostIndex)
       .then(result => {
-        setTotal(result.total);
+        setTotal(result.total.count);
         return result.data;
       })
-      .then((data) => setPosts((posts) => [...new Set([...posts, ...data])]))
+      .then((data) => setPosts((prev) => [...new Set([...prev, ...data])]))
       .then(() => setLoading(false))
       .catch(() => setError(true));
-  }, [postService, postsNumber])
+  }, [postService, currentPostIndex])
 
+  
+  let i = 1;
+
+  const updateCurrentPostIndex = () => {
+    if(total > 0 && total / 4 < i) return;
+
+    setCurrentPostIndex(currentPostIndex + i*4);
+    i++;
+    console.log('Getting more posts...');
+  }
 
   const deletePost = (id) => {
     setPosts(() => posts.filter((post) => parseInt(post.id) !== parseInt(id)));
@@ -36,7 +48,7 @@ const usePost = ({postService, postsNumber}) => {
     setPosts(() => posts.map((post) => parseInt(post.id) === parseInt(id) ? updated : post));
   };
 
-  return { posts, total, loading, error, createPost, updatePost, deletePost }
+  return { posts, total, loading, error, createPost, updatePost, deletePost, updateCurrentPostIndex }
 }
 
 export default usePost;
