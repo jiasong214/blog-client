@@ -29,4 +29,4 @@ const PostCardsList = ({posts, total}) => {
   )
 }
 
-export default PostCardsList;
+export default React.memo(PostCardsList);

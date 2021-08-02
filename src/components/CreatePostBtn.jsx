@@ -14,4 +14,4 @@ const CreatePostBtn = () => {
   )
 }
 
-export default CreatePostBtn;
+export default React.memo(CreatePostBtn);

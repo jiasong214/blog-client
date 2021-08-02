@@ -12,11 +12,9 @@ const Intro = () => {
       <p className="intro__text">
         About ... by <a href='https://github.com/JiaSong214' target="_blank" rel="noreferrer">Jia Song</a>
       </p>
-      <div className="intro__img">
-        <img src={image} alt="profile" />
-      </div>
+        <img className="intro__img" src={image} alt="girl with laptop" />
     </aside>
   )
 }
 
-export default Intro;
+export default React.memo(Intro);

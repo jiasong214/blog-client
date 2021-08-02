@@ -3,18 +3,18 @@
     "static/js/0.0430cf24.chunk.js": "/blog-client/static/js/0.0430cf24.chunk.js",
     "static/js/0.0430cf24.chunk.js.map": "/blog-client/static/js/0.0430cf24.chunk.js.map",
     "main.css": "/blog-client/static/css/main.9ec81be1.chunk.css",
-    "main.js": "/blog-client/static/js/main.d178da52.chunk.js",
-    "main.js.map": "/blog-client/static/js/main.d178da52.chunk.js.map",
-    "runtime-main.js": "/blog-client/static/js/runtime-main.b3569ffe.js",
-    "runtime-main.js.map": "/blog-client/static/js/runtime-main.b3569ffe.js.map",
+    "main.js": "/blog-client/static/js/main.1ff962a8.chunk.js",
+    "main.js.map": "/blog-client/static/js/main.1ff962a8.chunk.js.map",
+    "runtime-main.js": "/blog-client/static/js/runtime-main.382c3c9a.js",
+    "runtime-main.js.map": "/blog-client/static/js/runtime-main.382c3c9a.js.map",
     "static/js/3.53a47f6c.chunk.js": "/blog-client/static/js/3.53a47f6c.chunk.js",
     "static/js/3.53a47f6c.chunk.js.map": "/blog-client/static/js/3.53a47f6c.chunk.js.map",
     "static/css/4.64b7f160.chunk.css": "/blog-client/static/css/4.64b7f160.chunk.css",
     "static/js/4.cbf97f65.chunk.js": "/blog-client/static/js/4.cbf97f65.chunk.js",
     "static/js/4.cbf97f65.chunk.js.map": "/blog-client/static/js/4.cbf97f65.chunk.js.map",
     "static/css/5.f5cd0f0e.chunk.css": "/blog-client/static/css/5.f5cd0f0e.chunk.css",
-    "static/js/5.68bf6e38.chunk.js": "/blog-client/static/js/5.68bf6e38.chunk.js",
-    "static/js/5.68bf6e38.chunk.js.map": "/blog-client/static/js/5.68bf6e38.chunk.js.map",
+    "static/js/5.636adba2.chunk.js": "/blog-client/static/js/5.636adba2.chunk.js",
+    "static/js/5.636adba2.chunk.js.map": "/blog-client/static/js/5.636adba2.chunk.js.map",
     "static/css/6.b42b6417.chunk.css": "/blog-client/static/css/6.b42b6417.chunk.css",
     "static/js/6.089129c9.chunk.js": "/blog-client/static/js/6.089129c9.chunk.js",
     "static/js/6.089129c9.chunk.js.map": "/blog-client/static/js/6.089129c9.chunk.js.map",
@@ -32,9 +32,9 @@
     "static/media/image.1836321e.png": "/blog-client/static/media/image.1836321e.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.b3569ffe.js",
+    "static/js/runtime-main.382c3c9a.js",
     "static/js/3.53a47f6c.chunk.js",
     "static/css/main.9ec81be1.chunk.css",
-    "static/js/main.d178da52.chunk.js"
+    "static/js/main.1ff962a8.chunk.js"
   ]
 }

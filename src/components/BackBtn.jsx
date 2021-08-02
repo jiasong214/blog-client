@@ -15,4 +15,4 @@ const BackBtn = () => {
   )
 }
 
-export default BackBtn;
+export default React.memo(BackBtn);

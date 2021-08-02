@@ -99,4 +99,4 @@ const CreatePost = ({postService, createPost, updatePost}) => {
   );
 }
 
-export default CreatePost;
+export default React.memo(CreatePost);

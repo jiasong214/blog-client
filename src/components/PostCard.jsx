@@ -49,4 +49,4 @@ const PostCard = ({id, index, title, createdAt, text }) => {
   )
 }
 
-export default PostCard;
+export default React.memo(PostCard);
