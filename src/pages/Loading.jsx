@@ -1,10 +1,12 @@
 import React from 'react';
-import '../style/loading.scss';
 
 const Loading = () => {
   return (
-    <div className="loading">
-      <div />
+    <div className="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
     </div>
   )
 }

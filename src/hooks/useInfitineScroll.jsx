@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 const useInfiniteScroll = ({
   root = null,
-  threshold = 0.1,
+  threshold = 0,
   rootMargin = '0px',
   onIntersect,
 }) => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import PostCard from './PostCard';
 import Loading from './Loading';
-import '../style/postCardsList.scss';
+import Footer from './Footer';
 
 const PostCardsList = ({posts, total}) => {
   let index = total + 1;
@@ -9,12 +9,12 @@ const PostCardsList = ({posts, total}) => {
   return (
     <>
       {posts.length === 0 && <Loading />}
-      <ul className="postCardsList">
+      <section className="postCardsList">
         {posts.map((post) => {
           index --;
 
           return (
-            <PostCard 
+            <PostCard
               key={post.id}
               id={post.id}
               index={index}
@@ -22,9 +22,10 @@ const PostCardsList = ({posts, total}) => {
               createdAt={post.createdAt}
               text={post.text} 
             />
-          )  
+          )
         })}
-      </ul>
+        <Footer />
+      </section>
     </>
   )
 }

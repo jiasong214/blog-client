@@ -75,7 +75,7 @@ const CreatePost = ({postService, createPost, updatePost}) => {
   return (
     <>
       <BackBtn />
-      <div className="createPost">
+      <section className="createPost">
         <div className="createPost-titlebox">
           <input 
             type="text" 
@@ -94,7 +94,7 @@ const CreatePost = ({postService, createPost, updatePost}) => {
         <div className="createPost-buttonbox">
           <button onClick={onSubmit} className="createPost__submitBtn">Compost</button>
         </div>
-      </div>
+      </section>
     </>
   );
 }

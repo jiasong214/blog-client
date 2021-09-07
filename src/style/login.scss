@@ -1,17 +1,28 @@
 @import "./global.scss";
 
 .login {
-  width: $width;
-  max-width: $max-width;
-  margin: 0 auto;
-  padding-top: 100px;
-  min-height: calc(100vh - 45px - 67px);
+  width: fit-content;
+  margin: 10vw auto;
 
   .login__title {
-    margin-bottom: 30px;
-    font-size: 3.8rem;
-    font-weight: 800;
+    margin-bottom: 10px;
+    font-size: 2.4rem;
+    font-weight: 600;
+    letter-spacing: 0.1rem;
     text-transform: uppercase;
+  }
+
+  .login__error {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    color: rgb(228, 0, 0);
+    font-weight: 600;
+    opacity: 0;
+
+    &[data-active="true"] {
+      opacity: 1;
+      transition: 0.5s;
+    }
   }
 
   form {
@@ -19,9 +30,10 @@
       all: unset;
       display: block;
       width: 280px;
-      padding: 7px 0px;
+      padding: 10px 10px;
       margin-bottom: 10px;
-      border-bottom: 1px solid black;
+      border: 1px solid $light-gray;
+      border-radius: 10px;
       font-size: 1.4rem;
 
       &:nth-child(2) {
@@ -31,10 +43,14 @@
 
     button {
       @extend input;
+      width: 100px;
+      border-radius: 20px;
       background: black;
       font-size: 1.2rem;
+      font-weight: 600;
       color: white;
       text-align: center;
+      letter-spacing: 0.1rem;
     }
   }
 }

@@ -7,24 +7,15 @@ const PostCard = ({id, index, title, createdAt, text }) => {
   const convertDate = (value) => {
     const converted = new Date(value);
     const year = converted.getFullYear();
-    const month = converted.toLocaleString('en', { month: 'long' });;
+    const shortYear = year.toString().substr(2,4);
+    const month = converted.toLocaleString('en', { month: 'short' });;
     const date = converted.getDate();
 
-    return `${date} ${month}, ${year}`;
-  }
-
-  const convertIndex = (value) => {
-    if(value === 11 || value === 12 || value === 13) return `${value}th Post`;
-
-    if(value % 10 === 1) return `${value}st Post`;
-    if(value % 10 === 2) return `${value}nd Post`;
-    if(value % 10 === 3) return `${value}st Post`;
-
-    return `${value}th Post`;
+    return `${date} ${month} ${shortYear}`;
   }
 
   const generatePreview = (text) => {
-    let textLength = window.innerWidth > 768 ? 500 : window.innerWidth > 480 ? 360 : 280;
+    let textLength = 180;
     const previewText = text.substr(0, textLength);
     const trimmedText = previewText.replaceAll('#', '').replaceAll('`', '').replaceAll('*', '');
 
@@ -32,20 +23,27 @@ const PostCard = ({id, index, title, createdAt, text }) => {
   }
 
   return (
-    <li className="postCard">
-      <Link to={{pathname: `/post/${id}`}}>
-        <h3 className="postCard__title">{title}</h3>
-      </Link>
-      <div className="postCard-container">
-        <span className="postCard__index">{convertIndex(index)}</span>
-        <span className="postCard__dot"></span>
-        <span className="postCard__createdAt">{convertDate(createdAt)}</span>
+    <article className="postCard">
+      <div className="postCard__leftbox">
+        <span className="postCard__index">
+          {`No. ${index}`}
+        </span>
+        <span className="postCard__createAt">
+          {convertDate(createdAt)}
+        </span>
       </div>
-      <div className="postCard__preview">{generatePreview(text)}</div>
-      <Link to={{pathname: `/post/${id}`}}>
-        <div className="postCard__readBtn">Continue Reading &rarr;</div>
-      </Link>
-    </li>
+      <div className="postCard__middlebox">
+        <Link to={{pathname: `/post/${id}`}}>
+          <h3 className="postCard__title">{title}</h3>
+        </Link>
+        <p className="postCard__preview">{generatePreview(text)}</p>
+      </div>
+      <div className="postCard__rightbox">
+        <Link to={{pathname: `/post/${id}`}} className="postCard__readBtn">
+          Read more
+        </Link>
+      </div>
+    </article>
   )
 }
 

@@ -1,0 +1,19 @@
+@import "./global.scss";
+
+.main {
+  width: $width;
+  max-width: 1025px;
+  margin: 0 auto;
+  padding-top: 5vw;
+  position: relative;
+  z-index: 10;
+
+  .main-innerbox {
+    display: flex;
+    justify-content: space-between;
+
+    @media screen and (max-width: 1024px) {
+      display: block;
+    }
+  }
+}

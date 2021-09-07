@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
 import BackBtn from '../components/BackBtn';
 import Markdown from '../components/Markdown';
 import PostSetting from '../components/PostSetting';
 import Comments from '../components/Comments';
 import Loading from '../components/Loading';
+import Footer from '../components/Footer';
 import '../style/post.scss';
 
 
@@ -15,7 +17,9 @@ const Post = ({postService, deletePost}) => {
   const [post, setPost] = useState([]);
   const { user } = useAuth();
 
-  //get the post
+  const [isReady, setIsReady] = useState(false);
+
+  // get the post
   useEffect(() => {
     postService
       .getPostById(params.id)
@@ -23,8 +27,12 @@ const Post = ({postService, deletePost}) => {
       .catch(console.error());
   }, [postService, params.id]);
 
-  //최적화하기
-  //delete the post
+  // ready to show
+  useEffect(() => {
+    if(post !== "") setIsReady(true);
+  }, [post]);
+
+
   const onDelete = (id) => {
     if (window.confirm('Do you want to delete this post?')) {
       postService
@@ -39,25 +47,44 @@ const Post = ({postService, deletePost}) => {
   const convertDate = (value) => {
     const converted = new Date(value);
     const year = converted.getFullYear();
-    const month = converted.toLocaleString('en', { month: 'long' });;
+    const month = converted.toLocaleString('en', { month: 'short' });;
     const date = converted.getDate();
 
-    return `${date} ${month}, ${year}`;
+    return `${date} ${month} ${year}`;
   }
+
 
   return (
     <>
-    <BackBtn />
-    {post.length === 0 ? <Loading /> :
-      (<section className='post'>
-        <h2 className="post__title">{post.title}</h2>
-        <span className="post__createdAt">Posted on {convertDate(post.createdAt)}</span>
-        <div className="post__contents">
-          <Markdown text={post.text} />
-        </div>
-        {user && user.token && <PostSetting id={params.id} onDelete={onDelete} />}
-        <Comments />
-      </section>
+    {!isReady ? <Loading /> :
+      (<motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.3 }}
+        style={{
+          position: "relative",
+          zIndex: 10
+        }}
+      >
+        <BackBtn />
+        <section className='post'>
+          <h2 className="post__title">
+            {post.title}
+          </h2>
+          <span className="post__createdAt">
+            {convertDate(post.createdAt)}
+          </span>
+          <div className="post__contents">
+            <Markdown text={post.text} />
+          </div>
+          {user?.token && 
+            <PostSetting id={params.id} onDelete={onDelete} />
+          }
+          <Comments />
+        </section>
+        <Footer />
+      </motion.div>
       )
     }
     </>

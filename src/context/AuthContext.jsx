@@ -12,9 +12,12 @@ export const AuthProvider = ({authService, children}) => {
   }, [authService]);
 
   const onLogin = useCallback(async (username, password) => {
-    authService
+    return authService
       .login(username, password)
-      .then((data) => setUser(data))
+      .then((data) => {
+        setUser(data);
+        return data;
+      })
   }, [authService])
 
   const onLogout = useCallback(async () => {

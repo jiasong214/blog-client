@@ -4,6 +4,8 @@ import useInfiniteScroll from '../hooks/useInfitineScroll';
 import Intro from '../components/Intro';
 import PostCardsList from '../components/PostCartsList';
 import CreatePostBtn from '../components/CreatePostBtn';
+import '../style/main.scss';
+import { motion } from 'framer-motion';
 
 const Main = ({ posts, total, updateCurrentPostIndex }) => {
   const { user } = useAuth();
@@ -18,13 +20,26 @@ const Main = ({ posts, total, updateCurrentPostIndex }) => {
 
   const { setTarget } = useInfiniteScroll({onIntersect});
 
+  const targetStyle = {
+    position: "relative",
+    top: "-30vh"
+  }
+
   return (
-    <main className='main'>
-      <Intro />
-      <PostCardsList posts={posts} total={total} />
+    <motion.main 
+      className='main'
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+    >
+      <div className="main-innerbox">
+        <Intro />
+        <PostCardsList posts={posts} total={total} />
+      </div>
       {user && user.token &&  <CreatePostBtn /> }
-      <div ref={setTarget}/>
-    </main>
+      <div style={targetStyle} ref={setTarget}/>
+    </motion.main>
   )
 }
 

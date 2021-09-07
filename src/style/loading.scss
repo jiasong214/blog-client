@@ -1,31 +1,30 @@
 @import "./global.scss";
 
 .loading {
-  .ellipsis {
-    width: fit-content;
-    margin: 50px auto;
-    display: flex;
-    justify-content: flex-start;
-    font-size: 5.2rem;
-    color: $light-gray;
+  width: fit-content;
+  height: fit-content;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
 
-    @for $i from 1 through 5 {
-      div:nth-child(#{$i}) {
-        width: 20px;
-        animation: changeColor 1.2s $i * 0.2s infinite;
-      }
-    }
+  div {
+    width: 36px;
+    height: 36px;
+    border: 2px solid white;
+    border-radius: 50%;
+    animation: rotation 0.7s ease-in-out infinite;
+    border-color: rgba(204, 204, 204, 1) rgba(204, 204, 204, 1) transparent
+      transparent;
+  }
+}
 
-    @keyframes changeColor {
-      0% {
-        color: $light-gray;
-      }
-      50% {
-        color: gray;
-      }
-      100% {
-        color: $light-gray;
-      }
-    }
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

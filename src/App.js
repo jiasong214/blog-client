@@ -1,6 +1,6 @@
+import { AnimatePresence } from 'framer-motion';
 import React, { lazy, Suspense } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import Footer from './components/Footer';
+import { Route, Switch, useLocation } from 'react-router-dom';
 import usePost from './hooks/usePost';
 
 const Main = lazy(() => import('./pages/Main'));
@@ -17,52 +17,65 @@ function App({postService}) {
     deletePost,
     updateCurrentPostIndex,
    } = usePost({postService});
-
-  // console.log('App is re-rendered');
+  const location = useLocation();
 
   return (
     <div className="App">
       <Suspense fallback={<div/>}>
-        <Switch>
-
-          {/* main: all posts */}
-          <Route exact path="/">
-            <Main 
-              postService={postService}  
-              posts={posts}
-              total={total}
-              updateCurrentPostIndex={updateCurrentPostIndex}
+        <AnimatePresence exitBeforeEnter>
+          <Switch key={location.pathname} location={location}>
+            {/* main: all posts */}
+            <Route 
+              exact path="/"
+              render={() =>
+                <Main 
+                  postService={postService}  
+                  posts={posts}
+                  total={total}
+                  updateCurrentPostIndex={updateCurrentPostIndex}
+                />
+              }
             />
-          </Route>
-
-          {/* create post page */}
-          <Route exact path="/post/compose">
-            <CreatePost 
-              postService={postService} 
-              createPost={createPost}
-              updatePost={updatePost}
+            {/* create post page */}
+            <Route 
+              exact path="/post/compose"
+              render={() =>
+                <CreatePost 
+                  postService={postService} 
+                  createPost={createPost}
+                  updatePost={updatePost}
+                />
+              }/>
+            {/* post(id) page */}
+            <Route 
+              exact path="/post/:id"
+              render={() =>
+                <Post 
+                  postService={postService} 
+                  deletePost={deletePost}
+                />
+              }
             />
-          </Route>
-
-          {/* post(id) page */}
-          <Route exact path="/post/:id">
-            <Post 
-              postService={postService} 
-              deletePost={deletePost}
+            {/* edit post(id)  */}
+            <Route 
+              exact path="/post/:id/edit"
+              render={() =>
+                <CreatePost 
+                  postService={postService} 
+                />
+              }
             />
-          </Route>
-
-          {/* edit post(id)  */}
-          <Route exact path="/post/:id/edit">
-            <CreatePost postService={postService} />
-          </Route>
-
-          {/* login page  */}
-          <Route exact path="/login" component={Login} />
-
-        </Switch>
+            {/* login page  */}
+            <Route exact path="/login" component={Login} />
+          </Switch>
+        </AnimatePresence>
       </Suspense>
-      <Footer />
+      
+      <div>
+        <div id="background" />
+        <div id="background-effect1" />
+        <div id="background-effect2" />
+      </div>
     </div>
   );
 }
