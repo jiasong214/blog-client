@@ -3,12 +3,11 @@
 .intro {
   margin-top: 50px;
   margin-right: 50px;
-  // width: 156px;
-  width: 240px;
+  width: 200px;
 
   .intro__innerbox {
     position: fixed;
-    width: 240px;
+    width: 200px;
   }
 
   @media (max-width: 1025px) {
@@ -22,11 +21,23 @@
   }
 
   .intro__title {
+    position: relative;
+    top: -22px;
     font-family: "Playfair Display", serif;
-    margin-bottom: 30px;
     font-size: 7.2rem;
     font-weight: 900;
-    line-height: 0.8;
+
+    background: linear-gradient(
+      90deg,
+      hsla(278, 100%, 50%, 0.5) 0%,
+      hsla(185, 100%, 50%, 1) 100%
+    );
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    @media (max-width: 1025px) {
+      margin-top: 5vw;
+    }
 
     @media (max-width: 768px) {
       font-size: 6rem;
@@ -36,14 +47,25 @@
   .intro__text {
     margin-bottom: 30px;
     font-size: 1.4rem;
+    color: rgb(175, 175, 175);
 
-    a {
+    em {
       text-decoration: underline;
     }
   }
 
   .intro__links {
+    margin-bottom: 50px;
     display: flex;
-    gap: 15px;
+    color: rgb(175, 175, 175);
+
+    > * {
+      margin-right: 15px;
+    }
+
+    svg:hover {
+      color: rgb(71, 97, 209);
+      transition: 0.3s;
+    }
   }
 }

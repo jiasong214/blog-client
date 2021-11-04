@@ -1,6 +1,9 @@
 @import "./global.scss";
 
 .createPost {
+  position: relative;
+  z-index: 100;
+
   .createPost-titlebox {
     width: $width;
     max-width: $max-width;

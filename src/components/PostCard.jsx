@@ -39,7 +39,7 @@ const PostCard = ({id, index, title, createdAt, text }) => {
         <p className="postCard__preview">{generatePreview(text)}</p>
       </div>
       <div className="postCard__rightbox">
-        <Link to={{pathname: `/post/${id}`}} className="postCard__readBtn">
+        <Link to={{pathname: `/post/${id}`}} className="postCard__readBtn hover-button">
           Read more
         </Link>
       </div>

@@ -15,9 +15,8 @@ const Post = ({postService, deletePost}) => {
   const params = useParams();
   const history = useHistory();
   const [post, setPost] = useState([]);
-  const { user } = useAuth();
-
   const [isReady, setIsReady] = useState(false);
+  const { user } = useAuth();
 
   // get the post
   useEffect(() => {
@@ -29,7 +28,11 @@ const Post = ({postService, deletePost}) => {
 
   // ready to show
   useEffect(() => {
-    if(post !== "") setIsReady(true);
+    if(post?.id !== "") {
+      setTimeout(() => {
+        setIsReady(true);
+      }, 1000)
+    }
   }, [post]);
 
 
@@ -61,7 +64,7 @@ const Post = ({postService, deletePost}) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.3 }}
+        transition={{ duration: 0.3, delay: 0.3 }}
         style={{
           position: "relative",
           zIndex: 10

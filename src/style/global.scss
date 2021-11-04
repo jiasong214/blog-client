@@ -26,8 +26,6 @@ a {
 // common attributes
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&display=swap");
 
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
-
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap");
 
 html {
@@ -36,6 +34,10 @@ html {
   font-smooth: antialiased;
   scroll-behavior: smooth;
   position: relative;
+}
+
+.App {
+  min-height: 100vh;
 }
 
 // variables
@@ -61,8 +63,8 @@ $light-gray: #ececec;
   background-color: rgb(162, 0, 255);
   opacity: 0.2;
   position: fixed;
-  left: -10vw;
-  bottom: -10vh;
+  left: -20vw;
+  bottom: -20vh;
   z-index: -1;
 }
 
@@ -73,7 +75,42 @@ $light-gray: #ececec;
   background-color: rgb(0, 234, 255);
   opacity: 0.3;
   position: fixed;
-  right: -10vw;
-  top: -10vh;
+  right: -20vw;
+  top: -20vh;
   z-index: -1;
+}
+
+// hover button effect
+.hover-button {
+  display: inline-block;
+  width: fit-content;
+  position: relative;
+
+  &::after {
+    display: block;
+    content: "";
+    width: 100%;
+    height: 1px;
+    background: black;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+
+  &:hover {
+    color: rgb(70, 96, 209);
+    transition: color 1s;
+
+    &::after {
+      background: linear-gradient(
+          90deg,
+          transparent 0%,
+          hsla(185, 100%, 50%, 1) 50%,
+          hsla(278, 100%, 50%, 1) 80%
+        )
+        var(--d, 100%) 100% /200% 1px repeat-x;
+      --d: -100%;
+      transition: 0.5s;
+    }
+  }
 }

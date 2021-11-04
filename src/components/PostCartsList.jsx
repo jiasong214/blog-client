@@ -8,7 +8,7 @@ const PostCardsList = ({posts, total}) => {
 
   return (
     <>
-      {posts.length === 0 && <Loading />}
+      {posts.length === 0 ? <Loading /> :
       <section className="postCardsList">
         {posts.map((post) => {
           index --;
@@ -26,6 +26,7 @@ const PostCardsList = ({posts, total}) => {
         })}
         <Footer />
       </section>
+      }
     </>
   )
 }

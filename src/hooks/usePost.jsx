@@ -27,7 +27,7 @@ const usePost = ({postService}) => {
   //update current index to get more post
   const updateCurrentPostIndex = (currentNum) => {
     setCurrentPostIndex(currentNum);
-    console.log(`Getting more posts from index ${currentNum}...`);
+    // console.log(`Getting more posts from index ${currentNum}...`);
   }
 
   const deletePost = (id) => {

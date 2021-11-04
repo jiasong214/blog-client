@@ -1,7 +1,7 @@
 import React from 'react';
 import {FaGithub} from 'react-icons/fa';
 import {MdMail} from 'react-icons/md';
-// import {AiFillLinkedin} from 'react-icons/ai'
+import {AiFillLinkedin} from 'react-icons/ai';
 import '../style/intro.scss';
 
 const Intro = () => {
@@ -12,16 +12,19 @@ const Intro = () => {
           Blog
         </h1>
         <p className="intro__text">
-          About blabla React Hook useCallback has ... by <a href='https://github.com/JiaSong214' target="_blank" rel="noreferrer">Jia Song</a>
+          About how I made this Blog.
+          <br/> by <em>Jia Song</em>
         </p>
         <div className="intro__links">
           <a href="mailto:jiasong214@gmail.com">
             <MdMail size={18} />
           </a>
-          <a href="https://github.com/jiasong214">
+          <a href="https://www.linkedin.com/in/jiasong214/" target="_blank" rel="noreferrer">
+            <AiFillLinkedin size={18} />
+          </a>
+          <a href="https://github.com/jiasong214" target="_blank" rel="noreferrer">
             <FaGithub size={18} />
           </a>
-          {/* <AiFillLinkedin size={18}></AiFillLinkedin> */}
         </div>
       </div>
     </section>

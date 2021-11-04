@@ -3,6 +3,8 @@
 .backBtn {
   width: 100vw;
   padding: 5vw 0 0;
+  position: relative;
+  z-index: 100;
 
   > div {
     width: $width;
@@ -15,8 +17,6 @@
     a {
       display: block;
       font-size: 1.4rem;
-      position: relative;
-      border-bottom: 1px solid black;
     }
   }
 }

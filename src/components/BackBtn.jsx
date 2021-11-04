@@ -7,7 +7,7 @@ const BackBtn = () => {
   return (
     <aside className="backBtn">
       <div>
-        <Link to='/'>
+        <Link to='/' className="hover-button">
           &larr; Back
         </Link>
       </div>

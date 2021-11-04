@@ -1,6 +1,7 @@
 import { AnimatePresence } from 'framer-motion';
 import React, { lazy, Suspense } from 'react';
 import { Route, Switch, useLocation } from 'react-router-dom';
+import Loading from './components/Loading';
 import usePost from './hooks/usePost';
 
 const Main = lazy(() => import('./pages/Main'));
@@ -21,6 +22,7 @@ function App({postService}) {
 
   return (
     <div className="App">
+      {posts?.length === 0 ? <Loading /> :
       <Suspense fallback={<div/>}>
         <AnimatePresence exitBeforeEnter>
           <Switch key={location.pathname} location={location}>
@@ -70,6 +72,7 @@ function App({postService}) {
           </Switch>
         </AnimatePresence>
       </Suspense>
+      }
       
       <div>
         <div id="background" />
