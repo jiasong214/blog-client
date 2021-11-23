@@ -10,7 +10,7 @@ const Comments = () => {
     const utterancesConfig = {
       src: "https://utteranc.es/client.js",
       repo: "jiasong214/blog-comments",
-      "issue-term": "pathname",
+      "issue-term": "url",
       theme: "github-light",
       crossorigin: "anonymous",
       async: true
